@@ -2,40 +2,21 @@ package br.ufpb.dcx.aps.carcassone;
 
 public class TipoTile {
 
-	private Origem origem;
-
 	private TipoLado ladoNorte;
 	private TipoLado ladoLeste;
 	private TipoLado ladoSul;
 	private TipoLado ladoOeste;
 
-	private boolean escudo;
-	private boolean mosteiro;
-	private boolean cidadeContinua;
-
 	public TipoTile() {
 	}
 
-	public TipoTile(Origem origem, TipoLado ladoNorte, TipoLado ladoLeste, TipoLado ladoSul, TipoLado ladoOeste,
-			boolean escudo, boolean mosteiro, boolean cidadeContinua) {
-		this.origem = origem;
+	public TipoTile(TipoLado ladoNorte, TipoLado ladoLeste, TipoLado ladoSul, TipoLado ladoOeste) {
 		this.ladoNorte = ladoNorte;
 		this.ladoLeste = ladoLeste;
 		this.ladoSul = ladoSul;
 		this.ladoOeste = ladoOeste;
-		this.escudo = escudo;
-		this.mosteiro = mosteiro;
-		this.cidadeContinua = cidadeContinua;
 	}
 	
-	public Origem getOrigem() {
-		return origem;
-	}
-
-	public void setOrigem(Origem origem) {
-		this.origem = origem;
-	}
-
 	public TipoLado getLadoNorte() {
 		return ladoNorte;
 	}
@@ -66,30 +47,6 @@ public class TipoTile {
 
 	public void setLadoOeste(TipoLado ladoOeste) {
 		this.ladoOeste = ladoOeste;
-	}
-
-	public boolean isEscudo() {
-		return escudo;
-	}
-
-	public void setEscudo(boolean escudo) {
-		this.escudo = escudo;
-	}
-
-	public boolean isMosteiro() {
-		return mosteiro;
-	}
-
-	public void setMosteiro(boolean mosteiro) {
-		this.mosteiro = mosteiro;
-	}
-
-	public boolean isCidadeContinua() {
-		return cidadeContinua;
-	}
-
-	public void setCidadeContinua(boolean cidadeContinua) {
-		this.cidadeContinua = cidadeContinua;
 	}
 
 }

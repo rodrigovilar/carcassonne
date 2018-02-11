@@ -1,7 +1,7 @@
 package br.ufpb.dcx.aps.carcassone;
 
-public enum TipoLado {
-
-	ESTRADA, CAMPO, CIDADE
+public interface TipoLado {
 	
+	String getAbreviacao();
+
 }
