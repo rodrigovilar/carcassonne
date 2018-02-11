@@ -52,7 +52,7 @@ public class JogoTest {
 	public void iniciarPartidaValida() {
 		mockarTiles(tiles, t45);
 		jogo.iniciarPartida(AZUL, VERDE);
-		verificarRelatorioPartida("AZUL Início", "AZUL, VERDE", "", "AZUL", "01N");
+		verificarRelatorioPartida("Início", "AZUL, VERDE", "", "AZUL", "01N");
 	}
 
 	@Test
@@ -60,13 +60,13 @@ public class JogoTest {
 		mockarTiles(tiles, t45);
 		jogo.iniciarPartida(VERDE, PRETO, AMARELO);
 		girar(1);
-		verificarRelatorioPartida("VERDE Início", "VERDE, PRETO, AMARELO", "", "VERDE", "01L");
+		verificarRelatorioPartida("Início", "VERDE, PRETO, AMARELO", "", "VERDE", "01L");
 
 		girar(2);
-		verificarRelatorioPartida("VERDE Início", "VERDE, PRETO, AMARELO", "", "VERDE", "01O");
+		verificarRelatorioPartida("Início", "VERDE, PRETO, AMARELO", "", "VERDE", "01O");
 
 		girar(1);
-		verificarRelatorioPartida("VERDE Início", "VERDE, PRETO, AMARELO", "", "VERDE", "01N");
+		verificarRelatorioPartida("Início", "VERDE, PRETO, AMARELO", "", "VERDE", "01N");
 	}
 
 	@Test
@@ -74,7 +74,7 @@ public class JogoTest {
 		mockarTiles(tiles, t45);
 		jogo.iniciarPartida(VERDE, PRETO, AMARELO, VERMELHO, AZUL);
 		rodadaInicial(2, 0, NAO_FINALIZA);
-		verificarRelatorioPartida("VERDE Tile", "VERDE, PRETO, AMARELO, VERMELHO, AZUL", "01S", "VERDE", null);
+		verificarRelatorioPartida("Tile", "VERDE, PRETO, AMARELO, VERMELHO, AZUL", "01S", "VERDE", null);
 	}
 
 	@Test
@@ -98,7 +98,7 @@ public class JogoTest {
 		rodadaInicial(0, 1, NAO_FINALIZA);
 
 		jogo.posicionarInicial();
-		verificarRelatorioPartida("VERMELHO Tile", "VERMELHO, AZUL", "01L", "AZUL", null);
+		verificarRelatorioPartida("Tile", "VERMELHO, AZUL", "01L", "AZUL", null);
 	}
 
 	@Test
@@ -108,7 +108,7 @@ public class JogoTest {
 		rodadaInicial(0, 3, NAO_FINALIZA);
 
 		jogo.posicionarInicial();
-		verificarRelatorioPartida("VERMELHO Tile", "VERMELHO, AZUL", "01O", "AZUL", null);
+		verificarRelatorioPartida("Tile", "VERMELHO, AZUL", "01O", "AZUL", null);
 	}
 
 	@Test
@@ -124,10 +124,10 @@ public class JogoTest {
 		mockarTiles(tiles, t45, t19);
 		jogo.iniciarPartida(VERDE, PRETO);
 		rodadaInicialSemGirar();
-		verificarRelatorioPartida("PRETO Início", "VERDE, PRETO", "01N", "PRETO", "02N");
+		verificarRelatorioPartida("Início", "VERDE, PRETO", "01N", "PRETO", "02N");
 
 		girar(3);
-		verificarRelatorioPartida("PRETO Início", "VERDE, PRETO", "01N", "PRETO", "02O");
+		verificarRelatorioPartida("Início", "VERDE, PRETO", "01N", "PRETO", "02O");
 	}
 
 	@Test
@@ -135,7 +135,7 @@ public class JogoTest {
 		doisTilesAmareloVermelhoRodada1SemGirar();
 
 		rodada(2, t45, LESTE, 0, NAO_FINALIZA);
-		verificarRelatorioPartida("VERMELHO Tile", "AMARELO, VERMELHO", "01N02S", "AMARELO", null);
+		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "01N02S", "VERMELHO", null);
 	}
 
 	@Test
@@ -143,7 +143,7 @@ public class JogoTest {
 		doisTilesAmareloVermelhoRodada1SemGirar();
 
 		rodada(1, t45, SUL, 0, NAO_FINALIZA);
-		verificarRelatorioPartida("VERMELHO Tile", "AMARELO, VERMELHO", "01N\n02S", "AMARELO", null);
+		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "01N\n02S", "VERMELHO", null);
 	}
 
 	@Test
@@ -151,7 +151,7 @@ public class JogoTest {
 		doisTilesAmareloVermelhoRodada1SemGirar();
 
 		rodada(0, t45, OESTE, 0, NAO_FINALIZA);
-		verificarRelatorioPartida("VERMELHO Tile", "AMARELO, VERMELHO", "02N01N", "AMARELO", null);
+		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "02N01N", "VERMELHO", null);
 	}
 
 	@Test
@@ -159,7 +159,7 @@ public class JogoTest {
 		doisTilesAmareloVermelhoRodada1SemGirar();
 
 		rodada(0, t45, NORTE, 0, NAO_FINALIZA);
-		verificarRelatorioPartida("VERMELHO Tile", "AMARELO, VERMELHO", "02N\n01N", "AMARELO", null);
+		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "02N\n01N", "VERMELHO", null);
 	}
 
 	@Test
@@ -168,7 +168,7 @@ public class JogoTest {
 
 		rodada(0, t45, NORTE, 0, NAO_FINALIZA);
 		rodada(1, t45, LESTE, 0, NAO_FINALIZA);
-		verificarRelatorioPartida("VERMELHO Tile", "AMARELO, VERMELHO", "01N02L", "AMARELO", null);
+		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "01N02L", "VERMELHO", null);
 	}
 
 	@Test
@@ -200,7 +200,7 @@ public class JogoTest {
 		rodadaInicialSemGirar();
 		
 		rodada(2, t45, LESTE, 0, FINALIZA);
-		verificarRelatorioPartida("AMARELO Tile", "AMARELO, VERMELHO", "01N02S", "VERMELHO", "01N");
+		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "01N02S", "AMARELO", "01N");
 	}
 
 	private static final boolean FINALIZA = true;
@@ -251,11 +251,11 @@ public class JogoTest {
 		when(mock.pegar()).thenReturn(primeiro, tiles);
 	}
 
-	private void verificarRelatorioPartida(String status, String sequencia, String tabuleiro, String proximoJogador,
+	private void verificarRelatorioPartida(String status, String sequencia, String tabuleiro, String jogadorRodada,
 			String proximaPeca) {
 		String relatorio = jogo.relatorioPartida();
 		Assert.assertEquals("Status: " + status + "\nJogadores: " + sequencia + "\nTabuleiro: " + tabuleiro
-				+ "\nPróximo jogador: " + proximoJogador + "\nPróximo tile: " + proximaPeca, relatorio);
+				+ "\nJogador da rodada: " + jogadorRodada + "\nPróximo tile: " + proximaPeca, relatorio);
 	}
 
 	// Pré-condições
