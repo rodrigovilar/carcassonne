@@ -5,11 +5,14 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.ufpb.dcx.aps.carcassone.ExcecaoJogo;
 import br.ufpb.dcx.aps.carcassone.Lado;
-import br.ufpb.dcx.aps.carcassone.TabuleiroFlexivel;
-import br.ufpb.dcx.aps.carcassone.Tile;
-import br.ufpb.dcx.aps.carcassone.TipoLado;
-import br.ufpb.dcx.aps.carcassone.TipoTile;
+import br.ufpb.dcx.aps.carcassone.tabuleiro.TabuleiroFlexivel;
+import br.ufpb.dcx.aps.carcassone.tabuleiro.Tile;
+import br.ufpb.dcx.aps.carcassone.tabuleiro.TipoLado;
+import br.ufpb.dcx.aps.carcassone.tabuleiro.TipoTile;
+
+import static br.ufpb.dcx.aps.carcassone.teste.Assertiva.*;
 
 public class TabuleiroFlexivelTest {
 	
@@ -77,6 +80,144 @@ public class TabuleiroFlexivelTest {
 		assertEquals("A\nB\nC\n", tabuleiroFlexivel.toString());		
 	}
 
+	@Test
+	public void testeL1() {
+		tabuleiroFlexivel.adicionarPrimeiroTile(TILE_A);
+		tabuleiroFlexivel.posicionar(TILE_A, Lado.SUL, TILE_B);
+		assertEquals("A\nB\n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_B, Lado.LESTE, TILE_C);
+		assertEquals("A \nBC\n", tabuleiroFlexivel.toString());		
+		tabuleiroFlexivel.posicionar(TILE_C, Lado.LESTE, TILE_D);
+		assertEquals("A  \nBCD\n", tabuleiroFlexivel.toString());		
+	}
+
+	@Test
+	public void testeL2() {
+		tabuleiroFlexivel.adicionarPrimeiroTile(TILE_A);
+		tabuleiroFlexivel.posicionar(TILE_A, Lado.SUL, TILE_B);
+		assertEquals("A\nB\n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_B, Lado.SUL, TILE_C);
+		assertEquals("A\nB\nC\n", tabuleiroFlexivel.toString());		
+		tabuleiroFlexivel.posicionar(TILE_C, Lado.OESTE, TILE_D);
+		assertEquals(" A\n B\nDC\n", tabuleiroFlexivel.toString());		
+	}
+
+	@Test
+	public void testeL3() {
+		tabuleiroFlexivel.adicionarPrimeiroTile(TILE_A);
+		tabuleiroFlexivel.posicionar(TILE_A, Lado.NORTE, TILE_B);
+		assertEquals("B\nA\n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_B, Lado.NORTE, TILE_C);
+		assertEquals("C\nB\nA\n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_C, Lado.LESTE, TILE_D);
+		assertEquals("CD\nB \nA \n", tabuleiroFlexivel.toString());		
+		tabuleiroFlexivel.posicionar(TILE_D, Lado.LESTE, TILE_E);
+		assertEquals("CDE\nB  \nA  \n", tabuleiroFlexivel.toString());		
+	}
+	
+	@Test
+	public void testeL4() {
+		tabuleiroFlexivel.adicionarPrimeiroTile(TILE_A);
+		tabuleiroFlexivel.posicionar(TILE_A, Lado.NORTE, TILE_B);
+		assertEquals("B\nA\n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_B, Lado.NORTE, TILE_C);
+		assertEquals("C\nB\nA\n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_C, Lado.OESTE, TILE_D);
+		assertEquals("DC\n B\n A\n", tabuleiroFlexivel.toString());		
+		tabuleiroFlexivel.posicionar(TILE_D, Lado.OESTE, TILE_E);
+		assertEquals("EDC\n  B\n  A\n", tabuleiroFlexivel.toString());		
+	}
+	
+	@Test
+	public void testeT1() {
+		tabuleiroFlexivel.adicionarPrimeiroTile(TILE_A);
+		tabuleiroFlexivel.posicionar(TILE_A, Lado.SUL, TILE_B);
+		assertEquals("A\nB\n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_B, Lado.SUL, TILE_C);
+		assertEquals("A\nB\nC\n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_C, Lado.SUL, TILE_D);
+		assertEquals("A\nB\nC\nD\n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_B, Lado.OESTE, TILE_E);
+		assertEquals(" A\nEB\n C\n D\n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_C, Lado.LESTE, TILE_F);
+		assertEquals(" A \nEB \n CF\n D \n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_E, Lado.OESTE, TILE_G);
+		assertEquals("  A \nGEB \n  CF\n  D \n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_F, Lado.LESTE, TILE_H);
+		assertEquals("  A  \nGEB  \n  CFH\n  D  \n", tabuleiroFlexivel.toString());
+	}
+
+	@Test
+	public void testeCruz() {
+		tabuleiroFlexivel.adicionarPrimeiroTile(TILE_A);
+		tabuleiroFlexivel.posicionar(TILE_A, Lado.SUL, TILE_B);
+		assertEquals("A\nB\n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_B, Lado.SUL, TILE_C);
+		assertEquals("A\nB\nC\n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_A, Lado.NORTE, TILE_D);
+		assertEquals("D\nA\nB\nC\n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_D, Lado.NORTE, TILE_E);
+		assertEquals("E\nD\nA\nB\nC\n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_A, Lado.OESTE, TILE_F);
+		assertEquals(" E\n D\nFA\n B\n C\n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_F, Lado.OESTE, TILE_G);
+		assertEquals("  E\n  D\nGFA\n  B\n  C\n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_A, Lado.LESTE, TILE_H);
+		assertEquals("  E \n  D \nGFAH\n  B \n  C \n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_H, Lado.LESTE, TILE_I);
+		assertEquals("  E  \n  D  \nGFAHI\n  B  \n  C  \n", tabuleiroFlexivel.toString());
+		tabuleiroFlexivel.posicionar(TILE_I, Lado.LESTE, TILE_J);
+		assertEquals("  E   \n  D   \nGFAHIJ\n  B   \n  C   \n", tabuleiroFlexivel.toString());
+	}
+	
+//  E	
+//  D	
+//GFAHIJ
+//  B
+//  C
+
+	@Test
+	public void testesColisaoProximo() {
+		tabuleiroFlexivel.adicionarPrimeiroTile(TILE_A);
+		tabuleiroFlexivel.posicionar(TILE_A, Lado.SUL, TILE_B);
+		ocorreExcecao( () -> tabuleiroFlexivel.posicionar(TILE_B, Lado.NORTE, TILE_C))
+				.tipoExcecao(ExcecaoJogo.class)
+				.mensagem("A posição NORTE do tile B já está ocupada pelo tile A");
+	}
+
+	@Test
+	public void testesColisaoDistante() {
+		tabuleiroFlexivel.adicionarPrimeiroTile(TILE_A);
+
+		tabuleiroFlexivel.posicionar(TILE_A, Lado.SUL, TILE_B);
+		tabuleiroFlexivel.posicionar(TILE_B, Lado.SUL, TILE_C);
+		tabuleiroFlexivel.posicionar(TILE_C, Lado.LESTE, TILE_D);
+		tabuleiroFlexivel.posicionar(TILE_D, Lado.LESTE, TILE_E);
+
+		tabuleiroFlexivel.posicionar(TILE_A, Lado.LESTE, TILE_F);
+		tabuleiroFlexivel.posicionar(TILE_F, Lado.LESTE, TILE_G);
+		tabuleiroFlexivel.posicionar(TILE_G, Lado.SUL, TILE_H);
+		
+		ocorreExcecao( () -> tabuleiroFlexivel.posicionar(TILE_H, Lado.SUL, TILE_I))
+				.tipoExcecao(ExcecaoJogo.class)
+				.mensagem("A posição SUL do tile H já está ocupada pelo tile E");
+	}
+	
+	@Test
+	public void testesDuplicidade() {
+		tabuleiroFlexivel.adicionarPrimeiroTile(TILE_A);
+		
+		ocorreExcecao( () -> tabuleiroFlexivel.posicionar(TILE_A, Lado.SUL, TILE_A))
+				.tipoExcecao(ExcecaoJogo.class)
+				.mensagem("O tile A já foi posicionado no tabuleiro");
+		
+		tabuleiroFlexivel.posicionar(TILE_A, Lado.SUL, TILE_B);
+		tabuleiroFlexivel.posicionar(TILE_B, Lado.LESTE, TILE_C);
+
+		ocorreExcecao( () -> tabuleiroFlexivel.posicionar(TILE_C, Lado.SUL, TILE_A))
+				.tipoExcecao(ExcecaoJogo.class)
+				.mensagem("O tile A já foi posicionado no tabuleiro");
+	}
 }
 
 class TipoLadoDummy implements TipoLado {

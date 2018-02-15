@@ -1,5 +1,8 @@
 package br.ufpb.dcx.aps.carcassone;
 
+import br.ufpb.dcx.aps.carcassone.tabuleiro.Tile;
+import br.ufpb.dcx.aps.carcassone.tabuleiro.TipoTile;
+
 /**
  * Source:
  * https://www.eecs.northwestern.edu/~robby/uc-courses/22001-2006-winter/tiles.html

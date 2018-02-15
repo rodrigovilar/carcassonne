@@ -1,4 +1,4 @@
-package br.ufpb.dcx.aps.carcassone;
+package br.ufpb.dcx.aps.carcassone.tabuleiro;
 
 public interface TipoLado {
 	

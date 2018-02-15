@@ -1,4 +1,6 @@
-package br.ufpb.dcx.aps.carcassone;
+package br.ufpb.dcx.aps.carcassone.tabuleiro;
+
+import br.ufpb.dcx.aps.carcassone.Lado;
 
 public class Tile {
 
@@ -68,7 +70,7 @@ public class Tile {
 		this.ladoOeste = ladoOeste;
 	}
 
-	void girar() {
+	public void girar() {
 		switch (orientacao) {
 		case NORTE:
 			orientacao = Lado.LESTE;
@@ -91,7 +93,7 @@ public class Tile {
 		ladoLeste = temp;
 	}
 
-	void reset() {
+	public void reset() {
 		while (orientacao != Lado.NORTE) {
 			girar();
 		}

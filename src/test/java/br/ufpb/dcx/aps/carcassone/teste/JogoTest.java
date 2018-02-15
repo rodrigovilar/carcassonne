@@ -8,7 +8,7 @@ import br.ufpb.dcx.aps.carcassone.BolsaDeTiles;
 import br.ufpb.dcx.aps.carcassone.ExcecaoJogo;
 import br.ufpb.dcx.aps.carcassone.Jogo;
 import br.ufpb.dcx.aps.carcassone.Lado;
-import br.ufpb.dcx.aps.carcassone.Tile;
+import br.ufpb.dcx.aps.carcassone.tabuleiro.Tile;
 
 import static org.mockito.Mockito.*;
 import static br.ufpb.dcx.aps.carcassone.TilesJogoBase.*;

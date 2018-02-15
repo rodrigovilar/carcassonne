@@ -1,5 +1,7 @@
 package br.ufpb.dcx.aps.carcassone;
 
+import br.ufpb.dcx.aps.carcassone.tabuleiro.Tile;
+
 public class Jogo {
 	
 	private Tile proximoTile;

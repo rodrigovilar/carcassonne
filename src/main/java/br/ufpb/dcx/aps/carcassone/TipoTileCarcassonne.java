@@ -1,5 +1,8 @@
 package br.ufpb.dcx.aps.carcassone;
 
+import br.ufpb.dcx.aps.carcassone.tabuleiro.TipoLado;
+import br.ufpb.dcx.aps.carcassone.tabuleiro.TipoTile;
+
 public class TipoTileCarcassonne extends TipoTile{
 
 	private Origem origem;
