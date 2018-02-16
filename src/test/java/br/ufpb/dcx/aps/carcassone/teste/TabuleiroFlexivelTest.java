@@ -16,8 +16,10 @@ import static br.ufpb.dcx.aps.carcassone.teste.Assertiva.*;
 
 public class TabuleiroFlexivelTest {
 	
-	private static TipoLado LADO_DUMMY = new TipoLadoDummy();
-	private static final TipoTile TIPO_DUMMY = new TipoTile(LADO_DUMMY, LADO_DUMMY, LADO_DUMMY, LADO_DUMMY);
+	private static TipoLado ASTERISK = TipoLadoTeste.ASTERISK;
+	private static TipoLado UNDERSCORE = TipoLadoTeste.UNDERSCORE;
+	
+	private static final TipoTile TIPO_DUMMY = new TipoTile(ASTERISK, ASTERISK, ASTERISK, ASTERISK);
 
 	private static Tile TILE_A = new Tile("A", TIPO_DUMMY);
 	private static Tile TILE_B = new Tile("B", TIPO_DUMMY);
@@ -29,13 +31,22 @@ public class TabuleiroFlexivelTest {
 	private static Tile TILE_H = new Tile("H", TIPO_DUMMY);
 	private static Tile TILE_I = new Tile("I", TIPO_DUMMY);
 	private static Tile TILE_J = new Tile("J", TIPO_DUMMY);
+	
 
+	private static final TipoTile TIPO_ALTERNADO = new TipoTile(ASTERISK, UNDERSCORE, ASTERISK, UNDERSCORE);
+
+	private static Tile TILE_1 = new Tile("1", TIPO_ALTERNADO);
+	private static Tile TILE_2 = new Tile("2", TIPO_ALTERNADO);
+	private static Tile TILE_3 = new Tile("3", TIPO_ALTERNADO);
+	private static Tile TILE_4 = new Tile("4", TIPO_ALTERNADO);
+	
 
 	private TabuleiroFlexivel tabuleiroFlexivel;
 	
 	@Before
 	public void novoJogo() {
 		tabuleiroFlexivel = new TabuleiroFlexivel();
+		TILE_3.reset();
 	}
 	
 	@Test
@@ -170,12 +181,6 @@ public class TabuleiroFlexivelTest {
 		assertEquals("  E   \n  D   \nGFAHIJ\n  B   \n  C   \n", tabuleiroFlexivel.toString());
 	}
 	
-//  E	
-//  D	
-//GFAHIJ
-//  B
-//  C
-
 	@Test
 	public void testesColisaoProximo() {
 		tabuleiroFlexivel.adicionarPrimeiroTile(TILE_A);
@@ -218,13 +223,72 @@ public class TabuleiroFlexivelTest {
 				.tipoExcecao(ExcecaoJogo.class)
 				.mensagem("O tile A já foi posicionado no tabuleiro");
 	}
-}
+	
+	@Test
+	public void testaLadoIncompatívelInicial() {
+		tabuleiroFlexivel.adicionarPrimeiroTile(TILE_1);
+		tabuleiroFlexivel.posicionar(TILE_1, Lado.NORTE, TILE_2);
+		
+		TILE_3.girar();
+		
+		ocorreExcecao( () -> tabuleiroFlexivel.posicionar(TILE_1, Lado.LESTE, TILE_3))
+				.tipoExcecao(ExcecaoJogo.class)
+				.mensagem("O lado LESTE do tile 1 (_) é diferente do lado OESTE (*) do tile 3");
+		
+		ocorreExcecao( () -> tabuleiroFlexivel.posicionar(TILE_1, Lado.SUL, TILE_3))
+				.tipoExcecao(ExcecaoJogo.class)
+				.mensagem("O lado SUL do tile 1 (*) é diferente do lado NORTE (_) do tile 3");
 
-class TipoLadoDummy implements TipoLado {
+		ocorreExcecao( () -> tabuleiroFlexivel.posicionar(TILE_1, Lado.OESTE, TILE_3))
+				.tipoExcecao(ExcecaoJogo.class)
+				.mensagem("O lado OESTE do tile 1 (_) é diferente do lado LESTE (*) do tile 3");
+		
+		tabuleiroFlexivel.posicionar(TILE_1, Lado.LESTE, TILE_4);
 
-	@Override
-	public String getAbreviacao() {
-		return "*";
+		ocorreExcecao( () -> tabuleiroFlexivel.posicionar(TILE_1, Lado.SUL, TILE_3))
+				.tipoExcecao(ExcecaoJogo.class)
+				.mensagem("O lado SUL do tile 1 (*) é diferente do lado NORTE (_) do tile 3");
+	}
+
+	@Test
+	public void testaLadoIncompatível() {
+		tabuleiroFlexivel.adicionarPrimeiroTile(TILE_1);
+		tabuleiroFlexivel.posicionar(TILE_1, Lado.NORTE, TILE_2);
+		
+		TILE_3.girar();
+		
+		ocorreExcecao( () -> tabuleiroFlexivel.posicionar(TILE_2, Lado.LESTE, TILE_3))
+				.tipoExcecao(ExcecaoJogo.class)
+				.mensagem("O lado LESTE do tile 2 (_) é diferente do lado OESTE (*) do tile 3");
+		
+		ocorreExcecao( () -> tabuleiroFlexivel.posicionar(TILE_2, Lado.NORTE, TILE_3))
+				.tipoExcecao(ExcecaoJogo.class)
+				.mensagem("O lado NORTE do tile 2 (*) é diferente do lado SUL (_) do tile 3");
+
+		ocorreExcecao( () -> tabuleiroFlexivel.posicionar(TILE_2, Lado.OESTE, TILE_3))
+				.tipoExcecao(ExcecaoJogo.class)
+				.mensagem("O lado OESTE do tile 2 (_) é diferente do lado LESTE (*) do tile 3");
+		
+		tabuleiroFlexivel.posicionar(TILE_2, Lado.LESTE, TILE_4);
+
+		ocorreExcecao( () -> tabuleiroFlexivel.posicionar(TILE_2, Lado.NORTE, TILE_3))
+				.tipoExcecao(ExcecaoJogo.class)
+				.mensagem("O lado NORTE do tile 2 (*) é diferente do lado SUL (_) do tile 3");
 	}
 	
+}
+
+enum TipoLadoTeste implements TipoLado{
+
+	ASTERISK("*"), UNDERSCORE("_");
+	
+	private final String abreviacao;
+
+	TipoLadoTeste(String abreviacao) {
+		this.abreviacao = abreviacao;
+	}
+	
+    public String getAbreviacao() { 
+    		return abreviacao; 
+    	}
 }

@@ -70,10 +70,13 @@ public class TabuleiroFlexivel {
 		return celulaReferencia;
 	}
 
-	private void posicionarNorte(Tile novoTile, CelulaTabuleiro celulaReferencia, CelulaTabuleiro[][] tabuleiro) {
+	private void posicionarNorte(Tile tileNovo, CelulaTabuleiro celulaReferencia, CelulaTabuleiro[][] tabuleiro) {
 		celulaOcupada(celulaReferencia, tabuleiro, celulaReferencia.getX(), celulaReferencia.getY() + 1, "NORTE");
 
-		CelulaTabuleiro novaCelula = new CelulaTabuleiro(novoTile, celulaReferencia.getX(),
+		verificarTipoLado(tileNovo, celulaReferencia.getTile(), "NORTE", celulaReferencia.getTile().getLadoNorte(),
+				"SUL", tileNovo.getLadoSul());
+
+		CelulaTabuleiro novaCelula = new CelulaTabuleiro(tileNovo, celulaReferencia.getX(),
 				celulaReferencia.getY() + 1);
 		celulaReferencia.setNorte(novaCelula);
 		novaCelula.setSul(celulaReferencia);
@@ -83,10 +86,13 @@ public class TabuleiroFlexivel {
 		}
 	}
 
-	private void posicionarLeste(Tile novoTile, CelulaTabuleiro celulaReferencia, CelulaTabuleiro[][] tabuleiro) {
+	private void posicionarLeste(Tile tileNovo, CelulaTabuleiro celulaReferencia, CelulaTabuleiro[][] tabuleiro) {
 		celulaOcupada(celulaReferencia, tabuleiro, celulaReferencia.getX() + 1, celulaReferencia.getY(), "LESTE");
 
-		CelulaTabuleiro novaCelula = new CelulaTabuleiro(novoTile, celulaReferencia.getX() + 1,
+		verificarTipoLado(tileNovo, celulaReferencia.getTile(), "LESTE", celulaReferencia.getTile().getLadoLeste(),
+				"OESTE", tileNovo.getLadoOeste());
+
+		CelulaTabuleiro novaCelula = new CelulaTabuleiro(tileNovo, celulaReferencia.getX() + 1,
 				celulaReferencia.getY());
 		celulaReferencia.setLeste(novaCelula);
 		novaCelula.setOeste(celulaReferencia);
@@ -96,10 +102,13 @@ public class TabuleiroFlexivel {
 		}
 	}
 
-	private void posicionarSul(Tile novoTile, CelulaTabuleiro celulaReferencia, CelulaTabuleiro[][] tabuleiro) {
+	private void posicionarSul(Tile tileNovo, CelulaTabuleiro celulaReferencia, CelulaTabuleiro[][] tabuleiro) {
 		celulaOcupada(celulaReferencia, tabuleiro, celulaReferencia.getX(), celulaReferencia.getY() - 1, "SUL");
 
-		CelulaTabuleiro novaCelula = new CelulaTabuleiro(novoTile, celulaReferencia.getX(),
+		verificarTipoLado(tileNovo, celulaReferencia.getTile(), "SUL", celulaReferencia.getTile().getLadoSul(),
+				"NORTE", tileNovo.getLadoNorte());
+
+		CelulaTabuleiro novaCelula = new CelulaTabuleiro(tileNovo, celulaReferencia.getX(),
 				celulaReferencia.getY() - 1);
 		celulaReferencia.setSul(novaCelula);
 		novaCelula.setNorte(celulaReferencia);
@@ -109,10 +118,13 @@ public class TabuleiroFlexivel {
 		}
 	}
 
-	private void posicionarOeste(Tile novoTile, CelulaTabuleiro celulaReferencia, CelulaTabuleiro[][] tabuleiro) {
+	private void posicionarOeste(Tile tileNovo, CelulaTabuleiro celulaReferencia, CelulaTabuleiro[][] tabuleiro) {
 		celulaOcupada(celulaReferencia, tabuleiro, celulaReferencia.getX() - 1, celulaReferencia.getY(), "OESTE");
 
-		CelulaTabuleiro novaCelula = new CelulaTabuleiro(novoTile, celulaReferencia.getX() - 1,
+		verificarTipoLado(tileNovo, celulaReferencia.getTile(), "OESTE", celulaReferencia.getTile().getLadoOeste(),
+				"LESTE", tileNovo.getLadoLeste());
+
+		CelulaTabuleiro novaCelula = new CelulaTabuleiro(tileNovo, celulaReferencia.getX() - 1,
 				celulaReferencia.getY());
 		celulaReferencia.setOeste(novaCelula);
 		novaCelula.setLeste(celulaReferencia);
@@ -124,21 +136,30 @@ public class TabuleiroFlexivel {
 
 	private void celulaOcupada(CelulaTabuleiro celulaReferencia, CelulaTabuleiro[][] tabuleiro, int x, int y,
 			String posicao) {
-		
+
 		int xAjustado = x - extremoOeste.getX();
 		int yAjustado = y - extremoSul.getY();
-		
+
 		if (xAjustado < 0 || xAjustado > tabuleiro.length - 1) {
 			return;
 		}
-		
+
 		if (yAjustado < 0 || yAjustado > tabuleiro[0].length - 1) {
 			return;
 		}
-		
+
 		if (tabuleiro[xAjustado][yAjustado] != null) {
 			throw new ExcecaoJogo("A posição " + posicao + " do tile " + celulaReferencia.getTile().getId()
 					+ " já está ocupada pelo tile " + tabuleiro[xAjustado][yAjustado].getTile().getId());
+		}
+	}
+
+	private void verificarTipoLado(Tile tileNovo, Tile tileReferencia, String ladoReferencia,
+			TipoLado tipoLadoReferencia, String ladoNovo, TipoLado tipoLadoNovo) {
+		if (!tipoLadoReferencia.equals(tipoLadoNovo)) {
+			throw new ExcecaoJogo("O lado " + ladoReferencia + " do tile " + tileReferencia.getId() + " ("
+					+ tipoLadoReferencia.getAbreviacao() + ") é diferente do lado " + ladoNovo + " ("
+					+ tipoLadoNovo.getAbreviacao() + ") do tile " + tileNovo.getId());
 		}
 	}
 
@@ -191,7 +212,7 @@ public class TabuleiroFlexivel {
 
 		CelulaTabuleiro[][] tabuleiro = montarTabuleiro();
 
-		for (int j = tabuleiro[0].length - 1; j >= 0 ; j--) {
+		for (int j = tabuleiro[0].length - 1; j >= 0; j--) {
 			for (int i = 0; i < tabuleiro.length; i++) {
 				s += (tabuleiro[i][j] == null) ? espacoVazio : tabuleiro[i][j].getTile().getId();
 			}
@@ -321,10 +342,8 @@ class CelulaTabuleiro {
 		if (tile == null) {
 			return "";
 		}
-			
+
 		return tile.getId() + x + y;
 	}
-	
-	
 
 }

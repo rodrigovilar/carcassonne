@@ -1,11 +1,13 @@
 package br.ufpb.dcx.aps.carcassone;
 
+import br.ufpb.dcx.aps.carcassone.tabuleiro.TabuleiroFlexivel;
 import br.ufpb.dcx.aps.carcassone.tabuleiro.Tile;
 
 public class Jogo {
 	
 	private Tile proximoTile;
 	private BolsaDeTiles tiles;
+	private TabuleiroFlexivel tabuleiro = new TabuleiroFlexivel("  ");
 	
 	
 	public Jogo(BolsaDeTiles tiles) {
@@ -27,6 +29,7 @@ public class Jogo {
 	}
 
 	public Jogo posicionarInicial() {
+		tabuleiro.adicionarPrimeiroTile(proximoTile);
 		return this;
 	}
 
@@ -40,7 +43,8 @@ public class Jogo {
 		return this;
 	}
 
-	public Jogo posicionar(Tile tileReferencia, Lado lesteTileReferencia) {
+	public Jogo posicionar(Tile tileReferencia, Lado ladoTileReferencia) {
+		tabuleiro.posicionar(tileReferencia, ladoTileReferencia, proximoTile);
 		return this;		
 	}
 	
