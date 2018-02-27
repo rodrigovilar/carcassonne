@@ -27,10 +27,10 @@ public class JogoTest {
 
 	@Test
 	public void iniciarPartidaInvalida() {
-		ocorreExcecaoJogo(() -> jogo.iniciarPartida(), "Cada partida deve ter uma sequência de pelos dois jogadores");
+		ocorreExcecaoJogo(() -> jogo.iniciarPartida(), "Cada partida deve ter uma sequência de pelo menos dois jogadores");
 
 		ocorreExcecaoJogo(() -> jogo.iniciarPartida(PRETO),
-				"Cada partida deve ter uma sequência de pelos dois jogadores");
+				"Cada partida deve ter uma sequência de pelo menos dois jogadores");
 
 		ocorreExcecaoJogo(() -> jogo.iniciarPartida(PRETO, PRETO),
 				"Não pode haver repetição de cores na sequência de jogadores");
@@ -52,7 +52,7 @@ public class JogoTest {
 	public void iniciarPartidaValida() {
 		mockarTiles(tiles, t45);
 		jogo.iniciarPartida(AZUL, VERDE);
-		verificarRelatorioPartida("Início", "AZUL, VERDE", "", "AZUL", "01N");
+		verificarRelatorioPartida("Início", "AZUL, VERDE", "", "AZUL", "45N");
 	}
 
 	@Test
@@ -60,13 +60,13 @@ public class JogoTest {
 		mockarTiles(tiles, t45);
 		jogo.iniciarPartida(VERDE, PRETO, AMARELO);
 		girar(1);
-		verificarRelatorioPartida("Início", "VERDE, PRETO, AMARELO", "", "VERDE", "01L");
+		verificarRelatorioPartida("Início", "VERDE, PRETO, AMARELO", "", "VERDE", "45L");
 
 		girar(2);
-		verificarRelatorioPartida("Início", "VERDE, PRETO, AMARELO", "", "VERDE", "01O");
+		verificarRelatorioPartida("Início", "VERDE, PRETO, AMARELO", "", "VERDE", "45O");
 
 		girar(1);
-		verificarRelatorioPartida("Início", "VERDE, PRETO, AMARELO", "", "VERDE", "01N");
+		verificarRelatorioPartida("Início", "VERDE, PRETO, AMARELO", "", "VERDE", "45N");
 	}
 
 	@Test
@@ -74,7 +74,7 @@ public class JogoTest {
 		mockarTiles(tiles, t45);
 		jogo.iniciarPartida(VERDE, PRETO, AMARELO, VERMELHO, AZUL);
 		rodadaInicial(2, 0, NAO_FINALIZA);
-		verificarRelatorioPartida("Tile", "VERDE, PRETO, AMARELO, VERMELHO, AZUL", "01S", "VERDE", null);
+		verificarRelatorioPartida("Tile", "VERDE, PRETO, AMARELO, VERMELHO, AZUL", "45S", "VERDE", null);
 	}
 
 	@Test
@@ -98,7 +98,7 @@ public class JogoTest {
 		rodadaInicial(0, 1, NAO_FINALIZA);
 
 		jogo.posicionarInicial();
-		verificarRelatorioPartida("Tile", "VERMELHO, AZUL", "01L", "AZUL", null);
+		verificarRelatorioPartida("Tile", "VERMELHO, AZUL", "45L", "AZUL", null);
 	}
 
 	@Test
@@ -108,7 +108,7 @@ public class JogoTest {
 		rodadaInicial(0, 3, NAO_FINALIZA);
 
 		jogo.posicionarInicial();
-		verificarRelatorioPartida("Tile", "VERMELHO, AZUL", "01O", "AZUL", null);
+		verificarRelatorioPartida("Tile", "VERMELHO, AZUL", "45O", "AZUL", null);
 	}
 
 	@Test
@@ -116,7 +116,7 @@ public class JogoTest {
 		mockarTiles(tiles, t45);
 		jogo.iniciarPartida(VERDE, PRETO, AMARELO, VERMELHO, AZUL);
 		rodadaInicialSemGirar();
-		verificarRelatorioPartida("Fim", "VERDE, PRETO, AMARELO, VERMELHO, AZUL", "01N", null, null);
+		verificarRelatorioPartida("Fim", "VERDE, PRETO, AMARELO, VERMELHO, AZUL", "45N", null, null);
 	}
 
 	@Test
@@ -124,10 +124,10 @@ public class JogoTest {
 		mockarTiles(tiles, t45, t19);
 		jogo.iniciarPartida(VERDE, PRETO);
 		rodadaInicialSemGirar();
-		verificarRelatorioPartida("Início", "VERDE, PRETO", "01N", "PRETO", "02N");
+		verificarRelatorioPartida("Início", "VERDE, PRETO", "45N", "PRETO", "19N");
 
 		girar(3);
-		verificarRelatorioPartida("Início", "VERDE, PRETO", "01N", "PRETO", "02O");
+		verificarRelatorioPartida("Início", "VERDE, PRETO", "45N", "PRETO", "19O");
 	}
 
 	@Test
@@ -135,7 +135,7 @@ public class JogoTest {
 		doisTilesAmareloVermelhoRodada1SemGirar();
 
 		rodada(2, t45, LESTE, 0, NAO_FINALIZA);
-		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "01N02S", "VERMELHO", null);
+		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "45N19S", "VERMELHO", null);
 	}
 
 	@Test
@@ -143,7 +143,7 @@ public class JogoTest {
 		doisTilesAmareloVermelhoRodada1SemGirar();
 
 		rodada(1, t45, SUL, 0, NAO_FINALIZA);
-		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "01N\n02S", "VERMELHO", null);
+		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "45N\n19L", "VERMELHO", null);
 	}
 
 	@Test
@@ -151,7 +151,7 @@ public class JogoTest {
 		doisTilesAmareloVermelhoRodada1SemGirar();
 
 		rodada(0, t45, OESTE, 0, NAO_FINALIZA);
-		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "02N01N", "VERMELHO", null);
+		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "19N45N", "VERMELHO", null);
 	}
 
 	@Test
@@ -159,7 +159,7 @@ public class JogoTest {
 		doisTilesAmareloVermelhoRodada1SemGirar();
 
 		rodada(0, t45, NORTE, 0, NAO_FINALIZA);
-		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "02N\n01N", "VERMELHO", null);
+		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "19N\n45N", "VERMELHO", null);
 	}
 
 	@Test
@@ -168,7 +168,7 @@ public class JogoTest {
 
 		rodada(0, t45, NORTE, 0, NAO_FINALIZA);
 		rodada(1, t45, LESTE, 0, NAO_FINALIZA);
-		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "01N02L", "VERMELHO", null);
+		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "45N19L", "VERMELHO", null);
 	}
 
 	@Test
@@ -176,13 +176,13 @@ public class JogoTest {
 		doisTilesAmareloVermelhoRodada1SemGirar();
 
 		ocorreExcecaoJogo(() -> rodada(3, t45, LESTE, 0, NAO_FINALIZA),
-				"O lado Leste do tile 01 (Campo) é incompatível com o lado Oeste do tile 02 (Cidade)");
+				"O lado Leste do tile 45 (Campo) é incompatível com o lado Oeste do tile 19 (Cidade)");
 		ocorreExcecaoJogo(() -> rodada(2, t45, OESTE, 0, NAO_FINALIZA),
-				"O lado Oeste do tile 01 (Campo) é incompatível com o lado Leste do tile 02 (Cidade)");
+				"O lado Oeste do tile 45 (Campo) é incompatível com o lado Leste do tile 19 (Cidade)");
 		ocorreExcecaoJogo(() -> rodada(3, t45, SUL, 0, NAO_FINALIZA),
-				"O lado Sul do tile 01 (Campo) é incompatível com o lado Norte do tile 02 (Cidade)");
+				"O lado Sul do tile 45 (Campo) é incompatível com o lado Norte do tile 19 (Cidade)");
 		ocorreExcecaoJogo(() -> rodada(2, t45, NORTE, 0, NAO_FINALIZA),
-				"O lado Norte do tile 01 (Campo) é incompatível com o lado Sul do tile 02 (Cidade)");
+				"O lado Norte do tile 45 (Campo) é incompatível com o lado Sul do tile 19 (Cidade)");
 	}
 	
 	@Test
@@ -190,7 +190,7 @@ public class JogoTest {
 		doisTilesAmareloVermelhoRodada1SemGirar();
 		
 		rodada(2, t45, LESTE, 0, FINALIZA);
-		verificarRelatorioPartida("Fim", "AMARELO, VERMELHO", "01N02S", null, null);
+		verificarRelatorioPartida("Fim", "AMARELO, VERMELHO", "45N19S", null, null);
 	}
 
 	@Test
@@ -200,7 +200,7 @@ public class JogoTest {
 		rodadaInicialSemGirar();
 		
 		rodada(2, t45, LESTE, 0, FINALIZA);
-		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "01N02S", "AMARELO", "01N");
+		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "45N19S", "AMARELO", "46N");
 	}
 
 	private static final boolean FINALIZA = true;
