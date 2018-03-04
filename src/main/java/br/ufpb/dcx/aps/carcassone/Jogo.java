@@ -43,9 +43,40 @@ public class Jogo {
 		return this;
 	}
 
-	public Jogo posicionar(Tile tileReferencia, Lado ladoTileReferencia) {
+	public Jogo posicionarTile(Tile tileReferencia, Lado ladoTileReferencia) {
 		tabuleiro.posicionar(tileReferencia, ladoTileReferencia, proximoTile);
 		return this;		
 	}
 	
+	public Jogo posicionarMeepleEstrada(Lado lado) {
+		return this;
+	}
+	
+	public Jogo posicionarMeepleCampo(Vertice vertice) {
+		return this;
+	}
+	
+	public Jogo posicionarMeepleCidade(Lado lado) {
+		return this;
+	}
+	
+	public Jogo posicionarMeepleMosteiro() {
+		return this;
+	}
+	
+	public String getEstradas() {
+		return null;
+	}
+	
+	public String getCampos() {
+		return null;
+	}
+	
+	public String getCidades() {
+		return null;
+	}
+
+	public String getMosteiros() {
+		return null;
+	}
 }

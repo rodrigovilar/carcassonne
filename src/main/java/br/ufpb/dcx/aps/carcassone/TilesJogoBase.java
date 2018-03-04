@@ -19,7 +19,12 @@ public interface TilesJogoBase {
 	Lado LESTE = Lado.LESTE;
 	Lado SUL = Lado.SUL;
 	Lado OESTE = Lado.OESTE;
-
+	
+	Vertice NORDESTE = Vertice.NORDESTE;
+	Vertice SUDESTE = Vertice.SUDESTE;
+	Vertice SUDOESTE = Vertice.SUDOESTE;
+	Vertice NOROESTE = Vertice.NOROESTE;
+	
 	Origem BASE = Origem.BASE;
 
 	TipoLadoCarcassonne CAMPO = TipoLadoCarcassonne.CAMPO;

@@ -25,9 +25,29 @@ Casos de Testes
 18 - Posicionar segundo Tile a leste do primeiro e finalizar (2 Tiles mockados)
 19 - Posicionar segundo Tile a leste do primeiro e finalizar rodada (3 tiles mockados)
 
-- Posicionar Rua
-- Posicionar Segunda Rua, verificar se não fecha Rua
-- Posicionar Segunda Rua, verificar se fecha Rua
-- Posicionar Rua e colocar meeple UNICO
-- Posicionar segunda Rua e colocar meeple (rua com dono)
+20 - Posicionar Segunda Rua, verificar se não fecha Rua
+- Posicionar Terceira Rua, verificar se fecha Rua
+- Posicionar Rua aberta e colocar meeple UNICO
+- Posicionar Rua fechando e colocar meeple UNICO
+- Posicionar Rua aberta e tentar colocar meeple (rua com dono)
+- Posicionar Rua fechando e tentar colocar meeple (rua com dono)
+- Unir duas ruas com donos (verificar pontuação)
+- Unir terceiro dono a rua com dois donos (verificar pontuação)
+
+- Posicionar Segunda Cidade, verificar se não fecha Cidade
+- Posicionar Terceira Cidade, verificar se fecha Cidade
+- Posicionar Cidade aberta e colocar meeple UNICO
+- Posicionar Cidade fechando e colocar meeple UNICO
+- Posicionar Cidade aberta e tentar colocar meeple (Cidade com dono)
+- Posicionar Cidade fechando e tentar colocar meeple (Cidade com dono)
+- Unir duas Cidades com donos (verificar pontuação)
+- Unir terceiro tile de Cidade e meeple à Cidade com dois donos (verificar pontuação)
+
+- Posicionar Mosteiro com meeple (verificar pontuação)
+- Posicionar tile vizinho de Mosteiro com meeple (verificar atualização de pontuação)
+- Posicionar último tile vizinho de Mosteiro com meeple (verificar pontuação)
+- Tentar colocar meeple em mosteiro inexistente
+
+- Tentar Colocar meeple antes de tile
+- Tentar colocar meeple em tile existente previamente no tabuleiro
 

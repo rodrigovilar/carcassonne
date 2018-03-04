@@ -25,7 +25,7 @@ public class JogoTest {
 		jogo = new Jogo(tiles);
 	}
 
-	@Test
+	@Test //#01
 	public void iniciarPartidaInvalida() {
 		ocorreExcecaoJogo(() -> jogo.iniciarPartida(), "Cada partida deve ter uma sequência de pelo menos dois jogadores");
 
@@ -43,19 +43,19 @@ public class JogoTest {
 				"Não pode iniciar uma partida enquanto a partida anterior não for finalizada");
 	}
 
-	@Test
+	@Test //#02
 	public void relatorioPartidaErro() {
 		ocorreExcecaoJogo(() -> jogo.relatorioPartida(), "Partida não iniciada");
 	}
 
-	@Test
+	@Test //#03
 	public void iniciarPartidaValida() {
 		mockarTiles(tiles, t45);
 		jogo.iniciarPartida(AZUL, VERDE);
 		verificarRelatorioPartida("Início", "AZUL, VERDE", "", "AZUL", "45N");
 	}
 
-	@Test
+	@Test //#04
 	public void girarTile() {
 		mockarTiles(tiles, t45);
 		jogo.iniciarPartida(VERDE, PRETO, AMARELO);
@@ -69,7 +69,7 @@ public class JogoTest {
 		verificarRelatorioPartida("Início", "VERDE, PRETO, AMARELO", "", "VERDE", "45N");
 	}
 
-	@Test
+	@Test //#05
 	public void colocarTileUnico() {
 		mockarTiles(tiles, t45);
 		jogo.iniciarPartida(VERDE, PRETO, AMARELO, VERMELHO, AZUL);
@@ -77,21 +77,21 @@ public class JogoTest {
 		verificarRelatorioPartida("Tile", "VERDE, PRETO, AMARELO, VERMELHO, AZUL", "45S", "VERDE", null);
 	}
 
-	@Test
+	@Test //#06
 	public void posicionarInicialInvalida() {
 		mockarTiles(tiles, t45);
 		ocorreExcecaoJogo(() -> jogo.posicionarInicial(),
 				"O tile inicial não pode ser posicionado antes de iniciar a partida");
 	}
 
-	@Test
+	@Test //#07
 	public void posicionarInicialInvalida2() {
 		mockarTiles(tiles, t45, t19);
 		ocorreExcecaoJogo(() -> jogo.posicionarInicial(),
 				"O tile inicial não pode ser posicionado antes de iniciar a partida");
 	}
 
-	@Test
+	@Test //#08
 	public void mudancaPosicaoInicial() {
 		mockarTiles(tiles, t45);
 		jogo.iniciarPartida(VERMELHO, AZUL);
@@ -101,7 +101,7 @@ public class JogoTest {
 		verificarRelatorioPartida("Tile", "VERMELHO, AZUL", "45L", "AZUL", null);
 	}
 
-	@Test
+	@Test //#09
 	public void mudancaPosicaoInicial2() {
 		mockarTiles(tiles, t45, t19);
 		jogo.iniciarPartida(VERMELHO, AZUL);
@@ -111,7 +111,7 @@ public class JogoTest {
 		verificarRelatorioPartida("Tile", "VERMELHO, AZUL", "45O", "AZUL", null);
 	}
 
-	@Test
+	@Test //#10
 	public void finalizarRodada() {
 		mockarTiles(tiles, t45);
 		jogo.iniciarPartida(VERDE, PRETO, AMARELO, VERMELHO, AZUL);
@@ -119,7 +119,7 @@ public class JogoTest {
 		verificarRelatorioPartida("Fim", "VERDE, PRETO, AMARELO, VERMELHO, AZUL", "45N", null, null);
 	}
 
-	@Test
+	@Test //#11
 	public void finalizarRodada2() {
 		mockarTiles(tiles, t45, t19);
 		jogo.iniciarPartida(VERDE, PRETO);
@@ -130,7 +130,7 @@ public class JogoTest {
 		verificarRelatorioPartida("Início", "VERDE, PRETO", "45N", "PRETO", "19O");
 	}
 
-	@Test
+	@Test //#12
 	public void posicionarSegundoTileLeste() {
 		doisTilesAmareloVermelhoRodada1SemGirar();
 
@@ -138,7 +138,7 @@ public class JogoTest {
 		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "45N19S", "VERMELHO", null);
 	}
 
-	@Test
+	@Test //#13
 	public void posicionarSegundoTileSul() {
 		doisTilesAmareloVermelhoRodada1SemGirar();
 
@@ -146,7 +146,7 @@ public class JogoTest {
 		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "45N\n19L", "VERMELHO", null);
 	}
 
-	@Test
+	@Test //#14
 	public void posicionarSegundoTileOeste() {
 		doisTilesAmareloVermelhoRodada1SemGirar();
 
@@ -154,7 +154,7 @@ public class JogoTest {
 		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "19N45N", "VERMELHO", null);
 	}
 
-	@Test
+	@Test //#15
 	public void posicionarSegundoTileNorte() {
 		doisTilesAmareloVermelhoRodada1SemGirar();
 
@@ -162,7 +162,7 @@ public class JogoTest {
 		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "19N\n45N", "VERMELHO", null);
 	}
 
-	@Test
+	@Test //#16
 	public void posicionarGirarPosicionarSegundoTile() {
 		doisTilesAmareloVermelhoRodada1SemGirar();
 
@@ -171,7 +171,7 @@ public class JogoTest {
 		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "45N19L", "VERMELHO", null);
 	}
 
-	@Test
+	@Test //#17
 	public void erroPosicionarSegundoTile() {
 		doisTilesAmareloVermelhoRodada1SemGirar();
 
@@ -185,7 +185,7 @@ public class JogoTest {
 				"O lado Norte do tile 45 (Campo) é incompatível com o lado Sul do tile 19 (Cidade)");
 	}
 	
-	@Test
+	@Test //#18
 	public void finalizarSegundaRodadaComDoisTiles() {
 		doisTilesAmareloVermelhoRodada1SemGirar();
 		
@@ -193,7 +193,7 @@ public class JogoTest {
 		verificarRelatorioPartida("Fim", "AMARELO, VERMELHO", "45N19S", null, null);
 	}
 
-	@Test
+	@Test //#19
 	public void finalizarSegundaRodadaComTresTiles() {
 		mockarTiles(tiles, t45, t19, t46);
 		jogo.iniciarPartida(AMARELO, VERMELHO);
@@ -201,6 +201,49 @@ public class JogoTest {
 		
 		rodada(2, t45, LESTE, 0, FINALIZA);
 		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "45N19S", "AMARELO", "46N");
+	}
+	
+	@Test //#20
+	public void posicionarMeepleAntesDePorTile() {
+		mockarTiles(tiles, t08, t64);
+		jogo.iniciarPartida(AMARELO, VERMELHO);	
+		ocorreExcecaoJogo(() -> jogo.posicionarMeepleEstrada(NORTE),
+				"Impossível posicionar meeple. Tile inválido ou inexistente");
+	}
+	
+	@Test //#21
+	public void posicionarSegundaRuaAberta() {
+		mockarTiles(tiles, t08, t64,t09); //ccrc rfrf ccrc
+		jogo.iniciarPartida(AMARELO, VERMELHO);		
+		rodadaInicialSemGirar();
+		
+		rodada(0, t08, SUL, 0, FINALIZA);
+		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "08N\n64N", "AMARELO", "09N");
+		verificarEstradas("08N(X,S)64N(N,S)");
+	}
+	
+	@Test //#22
+	public void posicionarTerceiraRuaFechando() {
+		mockarTiles(tiles, t08, t64,t09); //ccrc rfrf ccrc
+		jogo.iniciarPartida(AMARELO, VERMELHO);		
+		rodadaInicialSemGirar();
+		
+		rodada(0, t08, SUL, 0, FINALIZA);
+		rodada(2, t64, SUL, 0, FINALIZA);
+		verificarRelatorioPartida("Fim", "AMARELO, VERMELHO", "08N\n64N\n09S", "VERMELHO", null);
+		verificarEstradas("08N(X,S)64N(N,S)09S(N,X)");
+	}
+	
+	@Test //#23
+	public void posicionarSegundaRuaAbertaComMeeple() {
+		mockarTiles(tiles, t08, t64,t09); //ccrc rfrf ccrc
+		jogo.iniciarPartida(AMARELO, VERMELHO);		
+		rodadaInicialSemGirar();
+		
+		rodada(0, t08, SUL, 0, FINALIZA);
+		jogo.posicionarMeepleEstrada(NORTE);
+		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "08N\n64N", "AMARELO", "09N");
+		verificarEstradas("08N(X,S)64N(N,S)AMARELO");
 	}
 
 	private static final boolean FINALIZA = true;
@@ -231,7 +274,7 @@ public class JogoTest {
 		}
 		girar(girosAntesPosicionar);
 
-		jogo.posicionar(tileReferencia, ladoTileReferencia);
+		jogo.posicionarTile(tileReferencia, ladoTileReferencia);
 
 		girar(girosDepoisPosicionar);
 
@@ -257,7 +300,27 @@ public class JogoTest {
 		Assert.assertEquals("Status: " + status + "\nJogadores: " + sequencia + "\nTabuleiro: " + tabuleiro
 				+ "\nJogador da rodada: " + jogadorRodada + "\nPróximo tile: " + proximaPeca, relatorio);
 	}
-
+	
+	private void verificarEstradas(String verEstradas) {
+		String estradas = jogo.getEstradas();
+		Assert.assertEquals("Estradas: " + verEstradas, estradas);
+	}
+	
+	private void verificarCidades(String verCidades) {
+		String cidades = jogo.getCidades();
+		Assert.assertEquals("Cidades: " + verCidades, cidades);
+	}
+	
+	private void verificarCampos(String verCampos) {
+		String campos = jogo.getCampos();
+		Assert.assertEquals("Campos: " + verCampos, campos);
+	}
+	
+	private void verificarMosteiros(String verMosteiros) {
+		String mosteiros = jogo.getMosteiros();
+		Assert.assertEquals("Mosteiros: " + verMosteiros, mosteiros);
+	}
+	
 	// Pré-condições
 	private void rodadaInicialSemGirar() {
 		rodadaInicial(0, 0, FINALIZA);
