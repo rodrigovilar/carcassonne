@@ -98,8 +98,7 @@ public class JogoTest {
 		jogo.iniciarPartida(VERMELHO, AZUL);
 		rodadaInicial(0, 1, NAO_FINALIZA);
 
-		jogo.posicionarInicial();
-		verificarRelatorioPartida("Tile", "VERMELHO(7,0), AZUL(7,0)", "45L", "AZUL", null);
+		verificarRelatorioPartida("Tile", "VERMELHO(7,0), AZUL(7,0)", "45L", "VERMELHO", null);
 	}
 
 	@Test //#09
