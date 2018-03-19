@@ -47,7 +47,7 @@ public class Jogo {
 		tabuleiro.posicionar(tileReferencia, ladoTileReferencia, proximoTile);
 		return this;		
 	}
-	
+		
 	public Jogo posicionarMeepleEstrada(Lado lado) {
 		return this;
 	}
@@ -77,6 +77,10 @@ public class Jogo {
 	}
 
 	public String getMosteiros() {
+		return null;
+	}
+	
+	public String getScore() {
 		return null;
 	}
 }
