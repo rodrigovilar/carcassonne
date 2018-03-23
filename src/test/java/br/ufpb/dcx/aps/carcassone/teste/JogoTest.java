@@ -11,6 +11,9 @@ import br.ufpb.dcx.aps.carcassone.Lado;
 import br.ufpb.dcx.aps.carcassone.tabuleiro.Tile;
 
 import static org.mockito.Mockito.*;
+
+import java.util.Arrays;
+
 import static br.ufpb.dcx.aps.carcassone.TilesJogoBase.*;
 import static br.ufpb.dcx.aps.carcassone.teste.Assertiva.*;
 
@@ -107,8 +110,7 @@ public class JogoTest {
 		jogo.iniciarPartida(VERMELHO, AZUL);
 		rodadaInicial(0, 3, NAO_FINALIZA);
 
-		jogo.posicionarInicial();
-		verificarRelatorioPartida("Tile", "VERMELHO, AZUL", "45O", "AZUL", null);
+		verificarRelatorioPartida("Tile", "VERMELHO, AZUL", "45O", "VERMELHO", "19N");
 	}
 
 	@Test //#10
@@ -166,7 +168,6 @@ public class JogoTest {
 	public void posicionarGirarPosicionarSegundoTile() {
 		doisTilesAmareloVermelhoRodada1SemGirar();
 
-		rodada(0, t45, NORTE, 0, NAO_FINALIZA);
 		rodada(1, t45, LESTE, 0, NAO_FINALIZA);
 		verificarRelatorioPartida("Tile", "AMARELO, VERMELHO", "45N19L", "VERMELHO", null);
 	}
@@ -269,9 +270,6 @@ public class JogoTest {
 
 	private void rodada(int girosAntesPosicionar, Tile tileReferencia, Lado ladoTileReferencia,
 			int girosDepoisPosicionar, boolean finaliza) {
-		for (int i = 0; i < girosAntesPosicionar; i++) {
-			jogo.girarTile();
-		}
 		girar(girosAntesPosicionar);
 
 		jogo.posicionarTile(tileReferencia, ladoTileReferencia);
@@ -291,7 +289,7 @@ public class JogoTest {
 	}
 
 	private void mockarTiles(BolsaDeTiles mock, Tile primeiro, Tile... tiles) {
-		when(mock.pegar()).thenReturn(primeiro, tiles);
+		when(mock.pegar()).thenReturn(primeiro, Arrays.copyOf(tiles, tiles.length + 1));
 	}
 
 	private void verificarRelatorioPartida(String status, String sequencia, String tabuleiro, String jogadorRodada,
