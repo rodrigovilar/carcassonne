@@ -7,7 +7,7 @@ public class Partida {
 
 	private BolsaDeTiles tiles;
 	private Tile proximoTile;
-	private TabuleiroFlexivel tabuleiro = new TabuleiroFlexivel("  ");
+	private TabuleiroFlexivel tabuleiro = new TabuleiroFlexivel("");
 
 	Partida(BolsaDeTiles tiles) {
 		this.tiles = tiles;

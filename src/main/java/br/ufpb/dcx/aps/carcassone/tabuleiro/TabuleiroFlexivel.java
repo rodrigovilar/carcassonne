@@ -17,7 +17,7 @@ public class TabuleiroFlexivel {
 	private String espacoVazio;
 
 	public TabuleiroFlexivel() {
-		this(" ");
+		this("");
 	}
 
 	public TabuleiroFlexivel(String espacoVazio) {
