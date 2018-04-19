@@ -3,6 +3,7 @@ package br.ufpb.dcx.aps.carcassone;
 public class Jogo {
 
 	private boolean jogoIniciado = false;
+	private int quantpecaJogador;
 	
 	
 	public Partida criarPartida(BolsaDeTiles tiles, Cor... sequencia) {
@@ -25,9 +26,24 @@ public class Jogo {
 					throw new ExcecaoJogo("Não pode haver repetição de cores na sequência de jogadores");
 				}
 			}
-}
+		}
+		
 		return new Partida(tiles);
 	}
+	
+	public boolean getQuantpecaJogador() {
+		if (quantpecaJogador <= 1) {
+			return false;
+		} else {
+			return true;
+		}
+
+	}
+
+	public void setQuantpecaJogador(int quantpecaJogador) {
+		this.quantpecaJogador = quantpecaJogador;
+	}
+
 
 
 
