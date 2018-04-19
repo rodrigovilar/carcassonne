@@ -32,9 +32,6 @@ public class Partida {
 	}
 
 	public Partida girarTile() {
-		
-		finalizarTurno();
-		
 		if(proximoTile == null && partidaEncerrada){
 			throw new ExcecaoJogo("Não pode girar tiles com a partida finalizada");
 		}
