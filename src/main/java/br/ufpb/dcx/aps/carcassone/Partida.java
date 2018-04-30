@@ -9,68 +9,79 @@ public class Partida {
 	private BolsaDeTiles tiles;
 	private Tile proximoTile;
 	private TabuleiroFlexivel tabuleiro = new TabuleiroFlexivel("");
-	private String status = "Início";
-	private boolean partidaEncerrada = true;
-	private Cor proximaPecaJogador;
-	private Cor[] pecaJogador;
-	private String relatorioPartida = "";
-	
-	static int indiceDaListaDePecas = 0;
+	int indiceJogadorVez = 0;
+	String relatorio = "";
+	Status statusTurno = Status.TURNO_INICIO;
+	Status statusPartida;
 
-	ArrayList<Tile> tilesParaUsar = new ArrayList<Tile>();
 	
+	Jogadores[] jogadores;
+	
+
+//	ArrayList<Tile> tilesParaUsar = new ArrayList<Tile>();
+
 	Partida(BolsaDeTiles tiles, Cor[] sequencia) {
 		this.tiles = tiles;
 		pegarProximoTile();
+
+		jogadores = new Jogadores[sequencia.length];
+		for (int i = 0; i < sequencia.length; ++i) {
+			jogadores[i] = new Jogadores(sequencia[i]);
+		}
+		
+		statusPartida = Status.PTD_ANDAMENTO;
+		tabuleiro.adicionarPrimeiroTile(proximoTile);
+		pegarProximoTile();
+		
+
 	}
 
 	public String relatorioPartida() {
-		return null;
+		String sequencia = "";
+
+		for (int i = 0; i < jogadores.length - 1; i++) {
+			sequencia += jogadores[i].toString() + "; ";  //Desgraça do ; que eu não tava prestando atenção 
+		}
+
+		sequencia += jogadores[jogadores.length - 1];
+
+		relatorio = "Status: " + statusPartida + "\nJogadores: " + sequencia;
+
+		return relatorio;
+
 	}
 
 	public String relatorioTurno() {
-		return null;
+		Jogadores proximoJogador = jogadores[indiceJogadorVez%jogadores.length];
+		relatorio = "Jogador: " + proximoJogador.getCor() + "\nTile: " + proximoTile + "\nStatus: " + statusTurno;
+
+		
+		return relatorio;
 	}
 
 	public Partida girarTile() {
-		if(proximoTile == null && partidaEncerrada){
+		if (proximoTile == null ) {
 			throw new ExcecaoJogo("Não pode girar tiles com a partida finalizada");
 		}
-		
 		proximoTile.girar();
 		return this;
 	}
 
 	private void pegarProximoTile() {
-		Tile tile = tiles.pegar();
-		if (tile != null){
-			tile.reset();
+		proximoTile = tiles.pegar();
+		if (proximoTile != null) {
+			proximoTile.reset();
 		}
-			
+
 	}
 
 	public Partida finalizarTurno() {
-				
-		if (proximoTile == null && partidaEncerrada) {
-			status = "Fim";
-			proximaPecaJogador = null;
-
-		} else {
-			status = "Início";
-			indiceDaListaDePecas++;
-			partidaEncerrada = false;
-			proximaPecaJogador = pecaJogador[indiceDaListaDePecas % pecaJogador.length];
-		}
-
 		pegarProximoTile();
 		return this;
 	}
 
 	public Partida posicionarTile(Tile tileReferencia, Lado ladoTileReferencia) {
-		status = "Tile";
-		proximoTile = tilesParaUsar.get(tilesParaUsar.size() - 1);
 		tabuleiro.posicionar(tileReferencia, ladoTileReferencia, proximoTile);
-		pegarProximoTile();
 		return this;
 	}
 
@@ -107,6 +118,38 @@ public class Partida {
 	}
 
 	public String relatorioTabuleiro() {
-		return null;
+		return tabuleiro.toString();
 	}
+
+	public void verificarFimPartida() {
+		if (proximoTile == null) {
+			statusPartida = Status.PTD_FINALIZADA;
+		}
+	}
+
+	/*
+	 * Método de refatoração: Inline class
+	 */
+	public enum Status {
+		PTD_ANDAMENTO("Em_Andamento"), TURNO_INICIO("Início_Turno"), PTD_FINALIZADA("Partida_Finalizada");
+
+		final private String nStatus;
+
+		Status(String status) {
+			this.nStatus = status;
+		}
+
+		public String getStatus() {
+			return nStatus;
+		}
+
+		@Override
+		public String toString() {
+			return nStatus;
+		}
+
+	}
+	/*
+	 * FIM do Inline class
+	 */
 }
