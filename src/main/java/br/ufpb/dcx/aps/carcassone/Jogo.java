@@ -3,8 +3,6 @@ package br.ufpb.dcx.aps.carcassone;
 public class Jogo {
 
 	private boolean jogoIniciado = false;
-	private int quantpecaJogador;
-	
 	
 	public Partida criarPartida(BolsaDeTiles tiles, Cor... sequencia) {
 		
@@ -28,23 +26,9 @@ public class Jogo {
 			}
 		}
 		
-		return new Partida(tiles);
+		return new Partida(tiles,sequencia);
 	}
 	
-	public boolean getQuantpecaJogador() {
-		if (quantpecaJogador <= 1) {
-			return false;
-		} else {
-			return true;
-		}
-
-	}
-
-	public void setQuantpecaJogador(int quantpecaJogador) {
-		this.quantpecaJogador = quantpecaJogador;
-	}
-
-
 
 
 }

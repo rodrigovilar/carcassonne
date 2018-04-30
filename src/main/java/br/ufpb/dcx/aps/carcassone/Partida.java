@@ -13,12 +13,13 @@ public class Partida {
 	private boolean partidaEncerrada = true;
 	private Cor proximaPecaJogador;
 	private Cor[] pecaJogador;
+	private String relatorioPartida = "";
 	
 	static int indiceDaListaDePecas = 0;
 
 	ArrayList<Tile> tilesParaUsar = new ArrayList<Tile>();
 	
-	Partida(BolsaDeTiles tiles) {
+	Partida(BolsaDeTiles tiles, Cor[] sequencia) {
 		this.tiles = tiles;
 		pegarProximoTile();
 	}

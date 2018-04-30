@@ -78,7 +78,7 @@ public class JogoTest {
 	@Test
 	public void relatoriosNoInicioDaPartida() {
 		mockarTiles(tiles, t30, t29);
-		Partida partida = jogo.criarPartida(tiles, VERDE, VERMELHO);
+		Partida partida = jogo.criarPartida(tiles, AZUL, VERDE);
 
 		verificarRelatorioPartida(partida, "Em_Andamento", "AZUL(0,7); VERDE(0,7)");
 		verificarRelatorioTurno(partida, "VERDE", "29N", "Início_Turno");
