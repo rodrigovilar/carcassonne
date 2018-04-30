@@ -14,10 +14,6 @@ public class Jogo {
 			throw new ExcecaoJogo("Cada partida deve ter uma sequência de pelo menos dois jogadores");
 		}
 
-		if (jogoIniciado == true) {
-			throw new ExcecaoJogo("Não pode iniciar uma partida enquanto a partida anterior não for finalizada");
-		}
-
 		for (int i = 0; i < sequencia.length - 1; ++i) {
 			for (int j = i + 1; j < sequencia.length; ++j) {
 				if (sequencia[i] == sequencia[j]) {
