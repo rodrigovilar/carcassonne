@@ -18,7 +18,7 @@ public class Partida {
 	Jogadores[] jogadores;
 	
 
-//	ArrayList<Tile> tilesParaUsar = new ArrayList<Tile>();
+	ArrayList<Tile> tilesParaUsar = new ArrayList<Tile>();
 
 	Partida(BolsaDeTiles tiles, Cor[] sequencia) {
 		this.tiles = tiles;
@@ -72,6 +72,7 @@ public class Partida {
 		if (proximoTile != null) {
 			proximoTile.reset();
 		}
+		
 
 	}
 
@@ -131,7 +132,7 @@ public class Partida {
 	 * Método de refatoração: Inline class
 	 */
 	public enum Status {
-		PTD_ANDAMENTO("Em_Andamento"), TURNO_INICIO("Início_Turno"), PTD_FINALIZADA("Partida_Finalizada");
+		PTD_ANDAMENTO("Em_Andamento"), TURNO_INICIO("Início_Turno"), PTD_FINALIZADA("Partida_Finalizada"), T_POS("Tile_Posicionado");
 
 		final private String nStatus;
 
