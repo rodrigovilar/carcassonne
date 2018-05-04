@@ -37,6 +37,9 @@ public class Partida {
 	}
 
 	public String relatorioPartida() {
+		if(proximoTile == null) {
+			statusPartida = Status.PTD_FINALIZADA;
+		}
 		String sequencia = "";
 
 		for (int i = 0; i < jogadores.length - 1; i++) {
@@ -52,6 +55,9 @@ public class Partida {
 	}
 
 	public String relatorioTurno() {
+		if(statusPartida == Status.PTD_FINALIZADA ) {
+			throw new ExcecaoJogo("Partida finalizada");
+		}
 		Jogadores proximoJogador = jogadores[indiceJogadorVez%jogadores.length];
 		relatorio = "Jogador: " + proximoJogador.getCor() + "\nTile: " + proximoTile + "\nStatus: " + statusTurno;
 
