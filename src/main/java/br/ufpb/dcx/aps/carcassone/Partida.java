@@ -8,7 +8,7 @@ public class Partida {
 
 	private BolsaDeTiles tiles;
 	private Tile proximoTile;
-	private TabuleiroFlexivel tabuleiro = new TabuleiroFlexivel("");
+	private TabuleiroFlexivel tabuleiro = new TabuleiroFlexivel(" ");
 	int indiceJogadorVez = 0;
 	String relatorio = "";
 	Status statusTurno = Status.TURNO_INICIO;
