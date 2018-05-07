@@ -412,19 +412,20 @@ public class JogoTest {
 	public void estradasDesconexasMeeple() {
 		mockarTiles(tiles, t30, t64, t51);
 		Partida partida = jogo.criarPartida(tiles, AMARELO, VERMELHO);
+		girar(partida, 1);
 
-		partida.posicionarTile(t30, SUL);
+		partida.posicionarTile(t30, LESTE);
 		partida.finalizarTurno();
 		
-		partida.posicionarTile(t64, OESTE);
-		Assert.assertEquals("30(S) 64(N,S)\n51(O,S)", partida.getEstradas());
+		partida.posicionarTile(t30, SUL);
+		Assert.assertEquals("30(O,L) 64(O,L)\n51(O,S)", partida.getEstradas());
 		
 		partida.posicionarMeepleEstrada(SUL);
-		Assert.assertEquals("30(S) 64(N,S)\n51(O,S-VERMELHO)", partida.getEstradas());
+		Assert.assertEquals("30(O,L) 64(O,L)\n51(O,S-VERMELHO)", partida.getEstradas());
 		
 		verificarRelatorioPartida(partida, "Em_Andamento", "AMARELO(0,7); VERMELHO(0,6)");
 		verificarRelatorioTurno(partida, "VERMELHO", "51N", "Meeple_Posicionado");
-		verificarRelatorioTabuleiro(partida, "30N\n51N64N");
+		verificarRelatorioTabuleiro(partida, "30N64L\n51N");
 
 	}
 	
@@ -436,26 +437,27 @@ public class JogoTest {
 	public void posicionarMeepleEmEstradaOcupada() {
 		mockarTiles(tiles, t30, t64, t51, t52);
 		Partida partida = jogo.criarPartida(tiles, AMARELO, VERMELHO);
+		girar(partida, 1);
 
-		partida.posicionarTile(t30, SUL);
-		partida.posicionarMeepleEstrada(NORTE);
+		partida.posicionarTile(t30, LESTE);
+		partida.posicionarMeepleEstrada(LESTE);
 		partida.finalizarTurno();
 		
-		partida.posicionarTile(t64, OESTE);
+		partida.posicionarTile(t30, SUL);
 		partida.posicionarMeepleEstrada(OESTE);
 		partida.finalizarTurno();
-		Assert.assertEquals("30(S) 64(N-AMARELO,S)\n51(O-VERMELHO,S)", partida.getEstradas());
+		Assert.assertEquals("30(O,L) 64(O,L-AMARELO)\n51(O-VERMELHO,S)", partida.getEstradas());
 		
 		girar(partida, 1);
-		partida.posicionarTile(t64, SUL);
-		Assert.assertEquals("30(S) 64(N-AMARELO,S) 52(N,O)\n51(O-VERMELHO,S)", partida.getEstradas());
+		partida.posicionarTile(t64, LESTE);
+		Assert.assertEquals("30(O,L) 64(O,L-AMARELO) 52(N,O)\n51(O-VERMELHO,S)", partida.getEstradas());
 		
 		ocorreExcecaoJogo(() -> partida.posicionarMeepleEstrada(OESTE),
-				"Impossível posicionar meeple pois a estrada já está ocupada pelo meeple AMARELO no lado Norte do tile 64");
+				"Impossível posicionar meeple pois a estrada já está ocupada pelo meeple AMARELO no lado Leste do tile 64");
 		
 		verificarRelatorioPartida(partida, "Em_Andamento", "AMARELO(0,6); VERMELHO(0,6)");
 		verificarRelatorioTurno(partida, "AMARELO", "52L", "Tile_Posicionado");
-		verificarRelatorioTabuleiro(partida, "30N\n51N64N\n52N");
+		verificarRelatorioTabuleiro(partida, "30N64L52L\n51N");
 
 	}
 	
