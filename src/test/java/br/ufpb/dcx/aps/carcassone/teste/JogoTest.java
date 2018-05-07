@@ -279,8 +279,8 @@ public class JogoTest {
 		partida.posicionarTile(t30, OESTE);
 
 		verificarRelatorioPartida(partida, "Em_Andamento", "VERDE(0,7); PRETO(0,7)");
-		verificarRelatorioTurno(partida, "VERDE", "29S", "Tile_Posicionado");
-		verificarRelatorioTabuleiro(partida, "29S30N");
+		verificarRelatorioTurno(partida, "VERDE", "29N", "Tile_Posicionado");
+		verificarRelatorioTabuleiro(partida, "29N30N");
 	}
 
 	/**
@@ -314,8 +314,8 @@ public class JogoTest {
 		partida.posicionarTile(t30, LESTE);
 
 		verificarRelatorioPartida(partida, "Em_Andamento", "VERDE(0,7); PRETO(0,7)");
-		verificarRelatorioTurno(partida, "VERDE", "29S", "Tile_Posicionado");
-		verificarRelatorioTabuleiro(partida, "30N29S");
+		verificarRelatorioTurno(partida, "VERDE", "29N", "Tile_Posicionado");
+		verificarRelatorioTabuleiro(partida, "30N29N");
 	}
 
 	/**
@@ -385,6 +385,7 @@ public class JogoTest {
 	 * 
 	 *  Estrada com dois tiles e meeple
 	 */
+	@Test
 	public void estradaComDoisTilesMeeple() {
 		mockarTiles(tiles, t30, t64);
 		Partida partida = jogo.criarPartida(tiles, AMARELO, VERMELHO);
@@ -409,6 +410,7 @@ public class JogoTest {
 	 * 
 	 * Estradas desconexas com meeple
 	 */
+	@Test
 	public void estradasDesconexasMeeple() {
 		mockarTiles(tiles, t30, t64, t51);
 		Partida partida = jogo.criarPartida(tiles, AMARELO, VERMELHO);
@@ -434,6 +436,7 @@ public class JogoTest {
 	 * 
 	 * Posicionar meeple em estrada já ocupada
 	 */
+	@Test
 	public void posicionarMeepleEmEstradaOcupada() {
 		mockarTiles(tiles, t30, t64, t51, t52);
 		Partida partida = jogo.criarPartida(tiles, AMARELO, VERMELHO);
@@ -504,6 +507,7 @@ public class JogoTest {
 	 * 
 	 *  Campo com dois tiles e meeple
 	 */
+	@Test
 	public void campoComDoisTilesMeeple() {
 		mockarTiles(tiles, t30, t02);
 		Partida partida = jogo.criarPartida(tiles, AMARELO, VERMELHO);
@@ -524,6 +528,7 @@ public class JogoTest {
 	 * 
 	 *  Campo com três tiles e meeple
 	 */
+	@Test
 	public void campoComTresTilesMeeple() {
 		mockarTiles(tiles, t30, t02, t51);
 		Partida partida = jogo.criarPartida(tiles, AMARELO, VERMELHO);
