@@ -478,7 +478,7 @@ public class JogoTest {
 				"Impossível posicionar meeple em campo pois o vertice Sudeste do tile 02 é totalmente ocupado por Cidade");
 
 		ocorreExcecaoJogo(() -> partida.posicionarMeepleCampo(SUDOESTE),
-				"Impossível posicionar meeple em campo pois o vertice Sudeste do tile 02 é totalmente ocupado por Cidade");
+				"Impossível posicionar meeple em campo pois o vertice Sudoeste do tile 02 é totalmente ocupado por Cidade");
 	}
 	
 	/**
@@ -510,13 +510,13 @@ public class JogoTest {
 		girar(partida, 2);
 
 		partida.posicionarTile(t30, SUL);
-		Assert.assertEquals("30(NO,NE)\n30{SO,SE) 02(NO,NE)", partida.getCampos());
+		Assert.assertEquals("30(NO,NE)\n30(SO,SE) 02(NO,NE)", partida.getCampos());
 
 		partida.posicionarMeepleCampo(NORDESTE);
-		Assert.assertEquals("30(NO,NE)\\n30{SO,SE) 02(NO,NE-AMARELO)", partida.getCampos());
+		Assert.assertEquals("30(NO,NE)\n30(SO,SE) 02(NO,NE-AMARELO)", partida.getCampos());
 
 		partida.finalizarTurno();
-		Assert.assertEquals("30(NO,NE)\\n30{SO,SE) 02(NO,NE-AMARELO)", partida.getCampos());
+		Assert.assertEquals("30(NO,NE)\n30(SO,SE) 02(NO,NE-AMARELO)", partida.getCampos());
 	}
 	
 	/**
@@ -532,13 +532,13 @@ public class JogoTest {
 		partida.finalizarTurno();
 
 		partida.posicionarTile(t30, LESTE);
-		Assert.assertEquals("30(NO,NE) 51(NO,NE,SE)\n30{SO,SE) 02(NO,NE) 51(SO)", partida.getCampos());
+		Assert.assertEquals("30(NO,NE) 51(NO,NE,SE)\n30(SO,SE) 02(NO,NE) 51(SO)", partida.getCampos());
 
 		partida.posicionarMeepleCampo(SUDESTE);
-		Assert.assertEquals("30(NO,NE) 51(NO,NE,SE-VERMELHO)\\n30{SO,SE) 02(NO,NE) 51(SO)", partida.getCampos());
+		Assert.assertEquals("30(NO,NE) 51(NO,NE,SE-VERMELHO)\n30(SO,SE) 02(NO,NE) 51(SO)", partida.getCampos());
 
 		partida.finalizarTurno();
-		Assert.assertEquals("30(NO,NE) 51(NO,NE,SE-VERMELHO)\\n30{SO,SE) 02(NO,NE) 51(SO)", partida.getCampos());
+		Assert.assertEquals("30(NO,NE) 51(NO,NE,SE-VERMELHO)\n30(SO,SE) 02(NO,NE) 51(SO)", partida.getCampos());
 	}
 	
 	private void girar(Partida partida, int quantidade) {
