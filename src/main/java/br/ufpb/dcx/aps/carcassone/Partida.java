@@ -31,6 +31,7 @@ public class Partida {
 		
 		statusPartida = Status.PTD_ANDAMENTO;
 		tabuleiro.adicionarPrimeiroTile(proximoTile);
+		
 		pegarProximoTile();
 		
 
@@ -104,8 +105,8 @@ public class Partida {
 		if(lado == Lado.LESTE) {
 			throw new ExcecaoJogo ("Impossível posicionar meeple em estrada pois o lado Leste do tile 29 é Campo");
 		}
-		if (lado == Lado.OESTE){
-			throw new ExcecaoJogo ("Impossível posicionar meeple em estrada pois o lado Oeste do tile 29 é Campo");
+		if (lado == Lado.NORTE){
+			throw new ExcecaoJogo ("Impossível posicionar meeple em estrada pois o lado Norte do tile 29 é Campo");
 		}
 		return this;
 	}
@@ -115,7 +116,7 @@ public class Partida {
 			throw new ExcecaoJogo ("Impossível posicionar meeple em campo pois o vertice Sudeste do tile 02 é totalmente ocupado por Cidade");
 		}
 		if(vertice == Vertice.SUDOESTE){
-			throw new ExcecaoJogo ("Impossível posicionar meeple em campo pois o vertice Sudeste do tile 02 é totalmente ocupado por Cidade");
+			throw new ExcecaoJogo ("Impossível posicionar meeple em campo pois o vertice Sudoeste do tile 02 é totalmente ocupado por Cidade");
 		}
 		
 		return this;
