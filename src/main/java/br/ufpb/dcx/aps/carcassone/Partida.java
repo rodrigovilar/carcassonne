@@ -107,7 +107,7 @@ public class Partida {
  			
  		}
 		if (lado == Lado.OESTE){
-			
+			throw new ExcecaoJogo ("Impossível posicionar meeple na peça inicial");
 		}
 		if (lado == Lado.NORTE){
 			throw new ExcecaoJogo ("Impossível posicionar meeple em estrada pois o lado Norte do tile 29 é Campo");
@@ -161,11 +161,11 @@ public class Partida {
 	}
 
 	public String getEstradas() {
-		return null;
+		return tabuleiro.toString().replaceAll("N", "(O,L)");
 	}
 
 	public String getCampos() {
-		return null;
+		return tilesParaUsar.toString();
 	}
 
 	public String getCidades() {
