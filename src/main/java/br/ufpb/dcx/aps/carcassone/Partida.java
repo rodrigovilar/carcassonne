@@ -58,7 +58,6 @@ public class Partida {
 
 		return relatorio;
 	}
-
 	public Partida girarTile() {
 
 		if (proximoTile == null) {
