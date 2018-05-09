@@ -99,7 +99,22 @@ public class Partida {
 	}
 
 	public Partida posicionarMeepleEstrada(Lado lado) {
-		switch (lado) {
+		
+		if(lado == Lado.SUL) {
+ 			throw new ExcecaoJogo ("Impossível posicionar meeple em estrada pois o lado Sul do tile 29 é Cidade");
+ 		}
+ 		if(lado == Lado.LESTE) {
+ 			
+ 		}
+		if (lado == Lado.OESTE){
+			
+		}
+		if (lado == Lado.NORTE){
+			throw new ExcecaoJogo ("Impossível posicionar meeple em estrada pois o lado Norte do tile 29 é Campo");
+ 		}
+		return this;
+		
+		/*switch (lado) {
 		case SUL:
 			lado = Lado.SUL;
 			throw new ExcecaoJogo("Impossível posicionar meeple em estrada pois o lado Sul do tile 29 é Cidade");
@@ -115,11 +130,10 @@ public class Partida {
 		default:
 			break;
 		
-    }
-		return this;
+    }*/
+		
+		
 	}
-
-	
 	
 	public Partida posicionarMeepleCampo(Vertice vertice) {
 		switch (vertice) {
