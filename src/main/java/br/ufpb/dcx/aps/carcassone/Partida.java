@@ -106,12 +106,12 @@ public class Partida {
 		case LESTE:
 			lado = Lado.LESTE;
 			throw new ExcecaoJogo("Impossível posicionar meeple em estrada pois o lado Leste do tile 29 é Campo");
-
-		
 		case NORTE:
 			lado = Lado.NORTE;
 			throw new ExcecaoJogo("Impossível posicionar meeple em estrada pois o lado Norte do tile 29 é Campo");
-
+		case OESTE:
+			lado = Lado.OESTE;
+			throw new ExcecaoJogo("Impossível posicionar meeple em estrada pois o lado Oeste do tile 29 é Campo");
 		default:
 			break;
 		
