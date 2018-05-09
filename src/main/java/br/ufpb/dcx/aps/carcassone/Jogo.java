@@ -2,8 +2,6 @@ package br.ufpb.dcx.aps.carcassone;
 
 public class Jogo {
 
-	private boolean jogoIniciado = false;
-	
 	public Partida criarPartida(BolsaDeTiles tiles, Cor... sequencia) {
 		
 		if(tiles == null){
