@@ -112,7 +112,7 @@ public class Partida {
 		default:
 			break;
 		
-		}
+    }
 		return this;
 	}
 
