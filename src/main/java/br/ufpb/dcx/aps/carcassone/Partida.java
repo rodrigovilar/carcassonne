@@ -60,7 +60,9 @@ public class Partida {
 	}
 
 	public Partida girarTile() {
-
+		if(statusTurno == Status.T_POS) {
+			throw new ExcecaoJogo("Não pode girar tile já posicionado");
+		}
 		if (proximoTile == null) {
 			statusPartida = Status.PTD_FINALIZADA;
 			throw new ExcecaoJogo("Não pode girar tiles com a partida finalizada");
@@ -87,9 +89,10 @@ public class Partida {
 	}
 
 	public Partida posicionarTile(Tile tileReferencia, Lado ladoTileReferencia) {
-		//retirada da condição que até então percebeu-se desnecessária
+		if(statusTurno == Status.T_POS) {
+			throw new ExcecaoJogo("Não pode reposicionar tile já posicionado");
+		}
 		tabuleiro.posicionar(tileReferencia, ladoTileReferencia, proximoTile);
-		
 		statusTurno = Status.T_POS; //mudança no estado do Turno para "Tile_Posicionado", para que dessa forma passe a vez pro próximo jogador e o turno prossiga
 		
 		return this;
