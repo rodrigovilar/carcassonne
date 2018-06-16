@@ -1,10 +1,17 @@
 package br.ufpb.dcx.aps.carcassone;
 
 import java.util.ArrayList;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import br.ufpb.dcx.aps.carcassone.tabuleiro.TabuleiroFlexivel;
 import br.ufpb.dcx.aps.carcassone.tabuleiro.Tile;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class Partida {
+	//private Integer id;
 	private Tile proximoTile;
 	private BolsaDeTiles tiles;
 	private TabuleiroFlexivel tabuleiro = new TabuleiroFlexivel(" ");
@@ -17,7 +24,7 @@ public class Partida {
 
 	ArrayList<Tile> tilesParaUsar = new ArrayList<Tile>();
 
-	Partida(BolsaDeTiles tiles, Cor[] sequencia) {
+	public Partida(BolsaDeTiles tiles, Cor[] sequencia) {
 		this.tiles = tiles;
 		pegarProximoTile();
 
@@ -69,6 +76,18 @@ public class Partida {
 		}
 		proximoTile.girar();
 		return this;
+	}
+	
+	
+	@JsonIgnore //Annotation para que esse trecho seja ignorado
+	
+	public Tile getTile() {
+		return tilesParaUsar.get(tilesParaUsar.size()-1);
+	}
+
+	public Jogadores proximoJogador() {
+		return jogadores[indiceJogadorVez % jogadores.length];
+			
 	}
 
 	private void pegarProximoTile() {
@@ -194,7 +213,7 @@ public class Partida {
 	 */
 	public enum Status {
 		PTD_ANDAMENTO("Em_Andamento"), TURNO_INICIO("Início_Turno"), PTD_FINALIZADA("Partida_Finalizada"), T_POS(
-				"Tile_Posicionado");
+				"Tile_Posicionado"), M_P("Meeple_Posicionado");
 
 		final private String nStatus;
 
@@ -215,4 +234,19 @@ public class Partida {
 	/*
 	 * FIM do Inline class
 	 */
+
+	public Status getStatusPartida() {
+		return statusPartida;
+	}
+
+	public Status getStatusTurno() {
+		return statusTurno;
+	}
+	
+	public Jogadores[] getJogadores() {
+		return jogadores;
+	}
+	
+	
+	
 }
