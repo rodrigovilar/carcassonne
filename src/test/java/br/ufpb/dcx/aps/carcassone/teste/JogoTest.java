@@ -81,7 +81,7 @@ public class JogoTest {
 		Partida partida = jogo.criarPartida(tiles, AZUL, VERDE);
 
 		verificarRelatorioPartida(partida, "Em_Andamento", "AZUL(0,7); VERDE(0,7)");
-		verificarRelatorioTurno(partida, "VERDE", "29N", "Início_Turno");
+		verificarRelatorioTurno(partida, "AZUL", "29N", "Início_Turno");
 		verificarRelatorioTabuleiro(partida, "30N");
 	}
 
@@ -573,5 +573,4 @@ public class JogoTest {
 	private void verificarRelatorioTabuleiro(Partida partida, String configuracao) {
 		Assert.assertEquals(configuracao, partida.relatorioTabuleiro());
 	}
-
 }

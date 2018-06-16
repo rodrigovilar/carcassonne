@@ -1,18 +1,25 @@
 package br.ufpb.dcx.aps.carcassone.tabuleiro;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import br.ufpb.dcx.aps.carcassone.Lado;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Tile {
 
 	private String id;
 	private Lado orientacao;
 	private TipoTile tipoTile;
-	private TipoLado ladoNorte;
-	private TipoLado ladoLeste;
-	private TipoLado ladoSul;
-	private TipoLado ladoOeste;
+	@JsonIgnore private TipoLado ladoNorte;
+	@JsonIgnore private TipoLado ladoLeste;
+	@JsonIgnore private TipoLado ladoSul;
+	@JsonIgnore private TipoLado ladoOeste;
 
-	public Tile(String id, TipoTile tipoTile) {
+	@JsonIgnore //Annotation para que esse trecho seja ignorado
+	public Tile(@JsonProperty("id") String id, @JsonProperty("tipoTile") TipoTile tipoTile) {
 		this.id = id;
 		this.tipoTile = tipoTile;
 		this.orientacao = Lado.NORTE;
@@ -21,7 +28,8 @@ public class Tile {
 		setLadoOeste(tipoTile.getLadoOeste());
 		setLadoNorte(tipoTile.getLadoNorte());
 	}
-
+	
+	@JsonIgnore //Annotation para que esse trecho seja ignorado
 	public String getId() {
 		return id;
 	}
@@ -127,6 +135,12 @@ public class Tile {
 			return false;
 		return true;
 	}
+	
+	@JsonCreator
+	public Tile(@JsonProperty("id") String id, @JsonProperty("orientacao") Lado orientacao, @JsonProperty("tipoTile") TipoTile tipoTile) {
+		this(id,tipoTile);
+		this.orientacao = orientacao;
+}
 
 	
 }

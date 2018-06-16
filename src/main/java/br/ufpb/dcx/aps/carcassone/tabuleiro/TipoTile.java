@@ -1,5 +1,9 @@
 package br.ufpb.dcx.aps.carcassone.tabuleiro;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonDeserialize(as = TipoTile.class)
+
 public class TipoTile {
 
 	private TipoLado ladoNorte;
