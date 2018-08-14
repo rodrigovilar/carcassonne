@@ -236,6 +236,8 @@ public class JogoTest {
 	public void finalizarTurno() {
 		mockarTiles(tiles, t30, t29);
 		Partida partida = jogo.criarPartida(tiles, VERDE, PRETO);
+		partida.finalizarTurno();
+		
 		girar(partida, 2);
 		partida.posicionarTile(t30, LESTE);
 		partida.finalizarTurno();
