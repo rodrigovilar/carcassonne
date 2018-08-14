@@ -217,6 +217,8 @@ public class JogoTest {
 	public void modificarTilePosicionado2() {
 		mockarTiles(tiles, t30, t29, t01);
 		Partida partida = jogo.criarPartida(tiles, VERDE, PRETO, AMARELO, VERMELHO, AZUL);
+		partida.finalizarTurno();
+		
 		girar(partida, 2);
 		partida.posicionarTile(t30, LESTE);
 
