@@ -357,6 +357,7 @@ public class JogoTest {
 	public void erroPosicionarSegundoTile() {
 		mockarTiles(tiles, t30, t29);
 		Partida partida = jogo.criarPartida(tiles, VERDE, PRETO);
+		partida.finalizarTurno();
 
 		girar(partida, 3);
 		ocorreExcecaoJogo(() -> partida.posicionarTile(t30, LESTE),

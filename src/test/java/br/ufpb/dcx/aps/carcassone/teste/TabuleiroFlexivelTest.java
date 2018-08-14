@@ -214,14 +214,14 @@ public class TabuleiroFlexivelTest {
 		
 		ocorreExcecao( () -> tabuleiroFlexivel.posicionar(TILE_A, Lado.SUL, TILE_A))
 				.tipoExcecao(ExcecaoJogo.class)
-				.mensagem("O tile A já foi posicionado no tabuleiro");
+				.mensagem("Não pode reposicionar tile já posicionado");
 		
 		tabuleiroFlexivel.posicionar(TILE_A, Lado.SUL, TILE_B);
 		tabuleiroFlexivel.posicionar(TILE_B, Lado.LESTE, TILE_C);
 
 		ocorreExcecao( () -> tabuleiroFlexivel.posicionar(TILE_C, Lado.SUL, TILE_A))
 				.tipoExcecao(ExcecaoJogo.class)
-				.mensagem("O tile A já foi posicionado no tabuleiro");
+				.mensagem("Não pode reposicionar tile já posicionado");
 	}
 	
 	@Test

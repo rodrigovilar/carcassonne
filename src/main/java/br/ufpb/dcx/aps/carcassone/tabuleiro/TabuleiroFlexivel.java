@@ -64,7 +64,7 @@ public class TabuleiroFlexivel {
 		CelulaTabuleiro celulaDuplicada = encontrarCelula(celulaInicial, novoTile);
 
 		if (celulaDuplicada != null) {
-			throw new ExcecaoJogo("O tile " + novoTile.getId() + " já foi posicionado no tabuleiro");
+			throw new ExcecaoJogo("Não pode reposicionar tile já posicionado");
 		}
 
 		return celulaReferencia;
