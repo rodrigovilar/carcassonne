@@ -70,9 +70,9 @@ public class JogoTest {
 	 * Verifica os relatórios da partida logo após o seu início. O status da partida
 	 * é Em_Andamento. As cores dos jogadores aparecem no formato: COR1(PONTUACAO,
 	 * MEEPLES DISPONÍVEIS); COR2(... O status do turno deve ser Início_Turno,
-	 * também devem ser mostrados o primeiro jogador e o segundo tile disponível na
-	 * bolsa de tiles, pois o primeiro tile é posicionado automaticamente na criação
-	 * da partida. O tabuleiro deve conter a peça inicial na posição norte
+	 * também devem ser mostrados o primeiro jogador e o tile deste turno, que é o 
+	 * primeiro tile é posicionado automaticamente na criação da partida. 
+	 * O tabuleiro deve conter a peça inicial na posição norte
 	 * 
 	 */
 	@Test
@@ -81,7 +81,7 @@ public class JogoTest {
 		Partida partida = jogo.criarPartida(tiles, AZUL, VERDE);
 
 		verificarRelatorioPartida(partida, "Em_Andamento", "AZUL(0,7); VERDE(0,7)");
-		verificarRelatorioTurno(partida, "VERDE", "29N", "Início_Turno");
+		verificarRelatorioTurno(partida, "AZUL", "30N", "Início_Turno");
 		verificarRelatorioTabuleiro(partida, "30N");
 	}
 
