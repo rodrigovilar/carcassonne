@@ -98,6 +98,12 @@ public class JogoTest {
 		mockarTiles(tiles, t30);
 		Partida partida = jogo.criarPartida(tiles, AZUL, VERDE);
 
+		verificarRelatorioPartida(partida, "Em_Andamento", "AZUL(0,7); VERDE(0,7)");
+		verificarRelatorioTurno(partida, "AZUL", "30N", "Início_Turno");
+		verificarRelatorioTabuleiro(partida, "30N");
+		
+		partida.finalizarTurno();
+		
 		verificarRelatorioPartida(partida, "Partida_Finalizada", "AZUL(0,7); VERDE(0,7)");
 		ocorreExcecaoJogo(() -> partida.relatorioTurno(), "Partida finalizada");
 		verificarRelatorioTabuleiro(partida, "30N");
