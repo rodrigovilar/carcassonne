@@ -280,11 +280,13 @@ public class JogoTest {
 	public void posicionarSegundoTileSul() {
 		mockarTiles(tiles, t30, t29);
 		Partida partida = jogo.criarPartida(tiles, VERDE, PRETO);
+		partida.finalizarTurno();
+		
 		girar(partida, 2);
 		partida.posicionarTile(t30, SUL);
 
 		verificarRelatorioPartida(partida, "Em_Andamento", "VERDE(0,7); PRETO(0,7)");
-		verificarRelatorioTurno(partida, "VERDE", "29S", "Tile_Posicionado");
+		verificarRelatorioTurno(partida, "PRETO", "29S", "Tile_Posicionado");
 		verificarRelatorioTabuleiro(partida, "30N\n29S");
 	}
 
@@ -298,10 +300,12 @@ public class JogoTest {
 	public void posicionarSegundoTileOeste() {
 		mockarTiles(tiles, t30, t29);
 		Partida partida = jogo.criarPartida(tiles, VERDE, PRETO);
+		partida.finalizarTurno();
+		
 		partida.posicionarTile(t30, OESTE);
 
 		verificarRelatorioPartida(partida, "Em_Andamento", "VERDE(0,7); PRETO(0,7)");
-		verificarRelatorioTurno(partida, "VERDE", "29N", "Tile_Posicionado");
+		verificarRelatorioTurno(partida, "PRETO", "29N", "Tile_Posicionado");
 		verificarRelatorioTabuleiro(partida, "29N30N");
 	}
 
@@ -315,11 +319,13 @@ public class JogoTest {
 	public void posicionarSegundoTileNorte() {
 		mockarTiles(tiles, t30, t29);
 		Partida partida = jogo.criarPartida(tiles, VERDE, PRETO);
+		partida.finalizarTurno();
+
 		girar(partida, 2);
 		partida.posicionarTile(t30, NORTE);
 
 		verificarRelatorioPartida(partida, "Em_Andamento", "VERDE(0,7); PRETO(0,7)");
-		verificarRelatorioTurno(partida, "VERDE", "29S", "Tile_Posicionado");
+		verificarRelatorioTurno(partida, "PRETO", "29S", "Tile_Posicionado");
 		verificarRelatorioTabuleiro(partida, "29S\n30N");
 	}
 
@@ -333,10 +339,12 @@ public class JogoTest {
 	public void posicionarSegundoTileLeste() {
 		mockarTiles(tiles, t30, t29);
 		Partida partida = jogo.criarPartida(tiles, VERDE, PRETO);
+		partida.finalizarTurno();
+		
 		partida.posicionarTile(t30, LESTE);
 
 		verificarRelatorioPartida(partida, "Em_Andamento", "VERDE(0,7); PRETO(0,7)");
-		verificarRelatorioTurno(partida, "VERDE", "29N", "Tile_Posicionado");
+		verificarRelatorioTurno(partida, "PRETO", "29N", "Tile_Posicionado");
 		verificarRelatorioTabuleiro(partida, "30N29N");
 	}
 
