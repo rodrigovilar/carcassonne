@@ -81,7 +81,7 @@ public class JogoTest {
 		Partida partida = jogo.criarPartida(tiles, AZUL, VERDE);
 
 		verificarRelatorioPartida(partida, "Em_Andamento", "AZUL(0,7); VERDE(0,7)");
-		verificarRelatorioTurno(partida, "AZUL", "30N", "Início_Turno");
+		verificarRelatorioTurno(partida, "AZUL", "30N", "Tile_Posicionado");
 		verificarRelatorioTabuleiro(partida, "30N");
 	}
 
@@ -93,13 +93,13 @@ public class JogoTest {
 	 * bolsa. Nesse ponto (partida finalizada), não deve ser possível consultar o
 	 * relatório do turno, mas o tabuleiro é visível.
 	 */
-	@Test // #03
+	@Test
 	public void partidaComApenasUmTile() {
 		mockarTiles(tiles, t30);
 		Partida partida = jogo.criarPartida(tiles, AZUL, VERDE);
 
 		verificarRelatorioPartida(partida, "Em_Andamento", "AZUL(0,7); VERDE(0,7)");
-		verificarRelatorioTurno(partida, "AZUL", "30N", "Início_Turno");
+		verificarRelatorioTurno(partida, "AZUL", "30N", "Tile_Posicionado");
 		verificarRelatorioTabuleiro(partida, "30N");
 		
 		partida.finalizarTurno();
@@ -112,17 +112,22 @@ public class JogoTest {
 	/**
 	 * Caso de teste 04
 	 * 
-	 * No início do turno, o tile do turno pode ser girado. O resultado será
+	 * No primeiro turno, o tile não pode ser girado, pois a peça já está posicionada. 
+	 * No início de outro turno, o tile do turno pode ser girado. O resultado será
 	 * refletido no relatório do turno.
 	 */
 	@Test
 	public void girarTileNoInicioDoTurno() {
 		mockarTiles(tiles, t30, t29);
 		Partida partida = jogo.criarPartida(tiles, VERDE, VERMELHO);
+
+		ocorreExcecaoJogo(() -> girar(partida, 1), "Não pode girar tile já posicionado");
+
+		partida.finalizarTurno();
 		girar(partida, 1);
 
 		verificarRelatorioPartida(partida, "Em_Andamento", "VERDE(0,7); VERMELHO(0,7)");
-		verificarRelatorioTurno(partida, "VERDE", "29L", "Início_Turno"); // Tile da rodada virado para o leste
+		verificarRelatorioTurno(partida, "VERMELHO", "29L", "Início_Turno"); // Tile da rodada virado para o leste
 		verificarRelatorioTabuleiro(partida, "30N");
 	}
 
