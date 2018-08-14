@@ -177,12 +177,14 @@ public class JogoTest {
 	public void colocarUmTile() {
 		mockarTiles(tiles, t30, t29);
 		Partida partida = jogo.criarPartida(tiles, VERDE, PRETO, AMARELO, VERMELHO, AZUL);
+		partida.finalizarTurno();
+		
 		girar(partida, 2);
 		partida.posicionarTile(t30, LESTE);
 
 		verificarRelatorioPartida(partida, "Em_Andamento",
 				"VERDE(0,7); PRETO(0,7); AMARELO(0,7); VERMELHO(0,7); AZUL(0,7)");
-		verificarRelatorioTurno(partida, "VERDE", "29S", "Tile_Posicionado");
+		verificarRelatorioTurno(partida, "PRETO", "29S", "Tile_Posicionado");
 		verificarRelatorioTabuleiro(partida, "30N29S");
 	}
 
