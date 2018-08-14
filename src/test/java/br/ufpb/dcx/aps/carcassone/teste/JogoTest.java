@@ -141,6 +141,7 @@ public class JogoTest {
 	public void girarTilePartidaFinalizada() {
 		mockarTiles(tiles, t30);
 		Partida partida = jogo.criarPartida(tiles, AZUL, VERDE);
+		partida.finalizarTurno();
 
 		ocorreExcecaoJogo(() -> girar(partida, 1), "Não pode girar tiles com a partida finalizada");
 	}
