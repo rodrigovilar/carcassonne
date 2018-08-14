@@ -257,17 +257,18 @@ public class JogoTest {
 	public void finalizarTurno2() {
 		mockarTiles(tiles, t30, t29, t01);
 		Partida partida = jogo.criarPartida(tiles, VERDE, PRETO);
+		partida.finalizarTurno();
+		
 		girar(partida, 2);
 		partida.posicionarTile(t30, LESTE);
 		partida.finalizarTurno();
 
 		verificarRelatorioPartida(partida, "Em_Andamento", "VERDE(0,7); PRETO(0,7)");
-		verificarRelatorioTurno(partida, "PRETO", "01N", "Início_Turno");
+		verificarRelatorioTurno(partida, "VERDE", "01N", "Início_Turno");
 		verificarRelatorioTabuleiro(partida, "30N29S");
 
 		girar(partida, 3);
-		verificarRelatorioTurno(partida, "PRETO", "01O", "Início_Turno");
-	}
+		verificarRelatorioTurno(partida, "VERDE", "01O", "Início_Turno");	}
 
 	/**
 	 * Caso de teste 12
