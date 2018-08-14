@@ -155,15 +155,16 @@ public class JogoTest {
 	public void girarTile() {
 		mockarTiles(tiles, t30, t29);
 		Partida partida = jogo.criarPartida(tiles, VERDE, VERMELHO);
+		partida.finalizarTurno();
 
 		girar(partida, 1);
-		verificarRelatorioTurno(partida, "VERDE", "29L", "Início_Turno");
+		verificarRelatorioTurno(partida, "VERMELHO", "29L", "Início_Turno");
 
 		girar(partida, 2);
-		verificarRelatorioTurno(partida, "VERDE", "29O", "Início_Turno");
+		verificarRelatorioTurno(partida, "VERMELHO", "29O", "Início_Turno");
 
 		girar(partida, 1);
-		verificarRelatorioTurno(partida, "VERDE", "29N", "Início_Turno");
+		verificarRelatorioTurno(partida, "VERMELHO", "29N", "Início_Turno");
 	}
 
 	/**
