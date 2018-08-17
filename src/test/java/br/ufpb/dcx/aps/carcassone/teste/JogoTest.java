@@ -383,6 +383,7 @@ public class JogoTest {
 	public void posicionarMeepleEstradaSemEstrada() {
 		mockarTiles(tiles, t30, t29);
 		Partida partida = jogo.criarPartida(tiles, AMARELO, VERMELHO);
+		partida.finalizarTurno();
 		girar(partida, 2);
 		partida.posicionarTile(t30, SUL);
 
