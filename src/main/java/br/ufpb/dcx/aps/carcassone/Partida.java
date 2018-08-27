@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Partida {
 
-    private final String status;
+    private String status;
     private BolsaDeTiles tiles;
     private Tile proximoTile;
     private TabuleiroFlexivel tabuleiro = new TabuleiroFlexivel("  ");
@@ -40,6 +40,7 @@ public class Partida {
     }
 
     public String relatorioTurno() {
+        if ( status.equals("Partida_Finalizada")) throw new ExcecaoJogo("Partida finalizada");
         return "Jogador: " + jogadores.get(0) + "\nTile: " + turno.getTile() + "\nStatus: " + turno.getStatus();
     }
 
@@ -54,7 +55,12 @@ public class Partida {
     }
 
     public Partida finalizarTurno() {
-        pegarProximoTile();
+        turno.setStatus("Finalizado");
+        if (tiles.size() > 1) {
+            pegarProximoTile();
+        } else {
+           this.status = "Partida_Finalizada";
+        }
         return this;
     }
 
