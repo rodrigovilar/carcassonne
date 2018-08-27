@@ -20,7 +20,7 @@ public class Jogo {
 			}
 			sequenciatemp.add(sequencia[i]);
 		}
-		return new Partida(tiles);
+		return new Partida(tiles, sequencia);
 	}
 
 
