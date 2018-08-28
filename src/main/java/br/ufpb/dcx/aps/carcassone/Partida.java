@@ -10,6 +10,7 @@ public class Partida {
     private String status;
     private BolsaDeTiles tiles;
     private Tile proximoTile;
+    private Tile tileAnterior;
     private TabuleiroFlexivel tabuleiro = new TabuleiroFlexivel("  ");
     private ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
     private Turno turno;
@@ -60,6 +61,7 @@ public class Partida {
     }
 
     private void pegarProximoTile() {
+    	tileAnterior=proximoTile;
         proximoTile = tiles.pegar();
         proximoTile.reset();
     }
@@ -77,7 +79,7 @@ public class Partida {
 
     private void novoTurno() {
         turnos.add(turno);
-        turno = new Turno(proximoTile, jogadores.get(jogadorIndex++), "Início_Turno");
+        this.turno = new Turno(proximoTile, jogadores.get(jogadorIndex++), "Início_Turno");
     }
 
     public void posicionarPrimeiroTile(Tile tile) {
@@ -122,8 +124,12 @@ public class Partida {
     public String getMosteiros() {
         return null;
     }
-
     public String relatorioTabuleiro() {
-        return (turnos.size() > 0) ? turnos.get(0).getTile().toString() : turno.getTile().toString();
+    	if (tileAnterior!=null && turno.getStatus().equals("Tile_Posicionado")){
+    		return tileAnterior.toString()+"\n"+proximoTile.toString();
+    	}else if(turno.getStatus().equals("Início_Turno")){
+    		return (turnos.size() > 0) ? turnos.get(0).getTile().toString() : turno.getTile().toString();
+    	}
+    	return (turnos.size() > 0) ? turnos.get(0).getTile().toString() : turno.getTile().toString();
     }
 }
