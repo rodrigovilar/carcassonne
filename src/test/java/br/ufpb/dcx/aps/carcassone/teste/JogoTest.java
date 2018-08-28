@@ -144,7 +144,6 @@ public class JogoTest {
 		mockarTiles(tiles, t30);
 		Partida partida = jogo.criarPartida(tiles, AZUL, VERDE);
 		partida.finalizarTurno();
-		
 
 		ocorreExcecaoJogo(() -> girar(partida, 1), "Não pode girar tiles com a partida finalizada");
 	}
@@ -593,6 +592,8 @@ public class JogoTest {
 
 	private void mockarTiles(BolsaDeTiles mock, Tile primeiro, Tile... tiles) {
 		when(mock.pegar()).thenReturn(primeiro, Arrays.copyOf(tiles, tiles.length + 1));
+		when(mock.size()).thenReturn(tiles.length + 1);
+
 	}
 
 	private void verificarRelatorioPartida(Partida partida, String status, String sequencia) {

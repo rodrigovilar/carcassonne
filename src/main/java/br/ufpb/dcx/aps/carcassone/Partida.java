@@ -13,14 +13,15 @@ public class Partida {
     private TabuleiroFlexivel tabuleiro = new TabuleiroFlexivel("  ");
     private ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
     private Turno turno;
-    private ArrayList<Turno> turnos;
+    private ArrayList<Turno> turnos = new ArrayList<>();
+    private int jogadorIndex = 0;
 
     Partida(BolsaDeTiles tiles, Cor[] sequencia) {
         this.tiles = tiles;
         this.status = "Em_Andamento";
         adicionarJogadores(sequencia);
         pegarProximoTile();
-        turno = new Turno(proximoTile);
+        turno = new Turno(proximoTile, jogadores.get(jogadorIndex++), "Tile_Posicionado");
     }
 
     private void adicionarJogadores(Cor[] sequencia) {
@@ -41,12 +42,15 @@ public class Partida {
 
     public String relatorioTurno() {
         if ( status.equals("Partida_Finalizada")) throw new ExcecaoJogo("Partida finalizada");
-        return "Jogador: " + jogadores.get(0) + "\nTile: " + turno.getTile() + "\nStatus: " + turno.getStatus();
+        return "Jogador: " + turno.getJogador() + "\nTile: " + turno.getTile() + "\nStatus: " + turno.getStatus();
     }
 
     public Partida girarTile() {
         if (this.status == "Partida_Finalizada") {
         	throw new ExcecaoJogo("Não pode girar tiles com a partida finalizada");
+        }
+        if (turno.getStatus().equals("Tile_Posicionado")) {
+            throw new ExcecaoJogo("Não pode girar tile já posicionado");
         }
         else {
         	proximoTile.girar();
@@ -63,10 +67,17 @@ public class Partida {
         turno.setStatus("Finalizado");
         if (tiles.size() > 1) {
             pegarProximoTile();
+            novoTurno();
         } else {
            this.status = "Partida_Finalizada";
         }
         return this;
+    }
+
+    private void novoTurno() {
+        turnos.add(turno);
+        turno = new Turno(proximoTile, jogadores.get(jogadorIndex++), "Início_Turno");
+
     }
 
     public void posicionarPrimeiroTile(Tile tile) {
@@ -113,6 +124,6 @@ public class Partida {
     }
 
     public String relatorioTabuleiro() {
-        return proximoTile.toString();
+        return (turnos.size() > 0) ? turnos.get(0).getTile().toString() : turno.getTile().toString();
     }
 }

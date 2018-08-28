@@ -7,10 +7,10 @@ public class Turno {
     private Tile tile;
     private Jogador jogador;
 
-    public Turno(Tile tile){
+    public Turno(Tile tile, Jogador jogador, String status){
         this.tile = tile;
-        this.status = "Tile_Posicionado";
-        this.jogador = null;
+        this.status = status;
+        this.jogador = jogador;
     }
 
     public String getStatus() {
