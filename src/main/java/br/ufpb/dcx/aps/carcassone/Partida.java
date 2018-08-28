@@ -21,7 +21,8 @@ public class Partida {
         this.status = "Em_Andamento";
         adicionarJogadores(sequencia);
         pegarProximoTile();
-        turno = new Turno(proximoTile, jogadores.get(jogadorIndex++), "Tile_Posicionado");
+        turno = new Turno(proximoTile, jogadores.get(jogadorIndex++), null);
+        posicionarPrimeiroTile(proximoTile);
     }
 
     private void adicionarJogadores(Cor[] sequencia) {
@@ -77,17 +78,16 @@ public class Partida {
     private void novoTurno() {
         turnos.add(turno);
         turno = new Turno(proximoTile, jogadores.get(jogadorIndex++), "Início_Turno");
-
     }
 
     public void posicionarPrimeiroTile(Tile tile) {
         tabuleiro.adicionarPrimeiroTile(proximoTile);
         turno.setStatus("Tile_Posicionado");
-        pegarProximoTile();
     }
 
     public Partida posicionarTile(Tile tileReferencia, Lado ladoTileReferencia) {
         tabuleiro.posicionar(tileReferencia, ladoTileReferencia, proximoTile);
+        turno.setStatus("Tile_Posicionado");
         return this;
     }
 
