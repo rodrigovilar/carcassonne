@@ -5,6 +5,7 @@ import static br.ufpb.dcx.aps.carcassone.teste.Assertiva.ocorreExcecao;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.Assert;
@@ -42,6 +43,7 @@ public class JogoTest {
 	 */
 	@Test
 	public void iniciarPartidaInvalida() {
+		
 		ocorreExcecaoJogo(() -> jogo.criarPartida(null),
 				"A bolsa de tiles deve ser fornecida na criação de uma partida");
 
@@ -142,6 +144,7 @@ public class JogoTest {
 		mockarTiles(tiles, t30);
 		Partida partida = jogo.criarPartida(tiles, AZUL, VERDE);
 		partida.finalizarTurno();
+		
 
 		ocorreExcecaoJogo(() -> girar(partida, 1), "Não pode girar tiles com a partida finalizada");
 	}
