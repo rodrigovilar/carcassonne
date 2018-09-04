@@ -10,7 +10,6 @@ public class Partida {
     private String status;
     private BolsaDeTiles tiles;
     private Tile proximoTile;
-    private Tile tileAnterior;
     private TabuleiroFlexivel tabuleiro = new TabuleiroFlexivel("  ");
     private ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
     private Turno turno;
@@ -22,7 +21,7 @@ public class Partida {
         this.status = "Em_Andamento";
         adicionarJogadores(sequencia);
         pegarProximoTile();
-        turno = new Turno(proximoTile, jogadores.get(jogadorIndex++), null);
+        turno = new Turno(proximoTile, proximoJogador(), null);
         posicionarPrimeiroTile(proximoTile);
     }
 
@@ -61,25 +60,31 @@ public class Partida {
     }
 
     private void pegarProximoTile() {
-    	tileAnterior=proximoTile;
         proximoTile = tiles.pegar();
         proximoTile.reset();
     }
-
+    public Jogador proximoJogador(){
+        try {
+            return jogadores.get(jogadorIndex++);
+        } catch (IndexOutOfBoundsException e){
+            jogadorIndex = 0;
+            return jogadores.get(jogadorIndex++);
+        }
+    }
     public Partida finalizarTurno() {
         turno.setStatus("Finalizado");
-        if (tiles.size() > 1) {
+        if (tiles.size() > turnos.size()+1) {
             pegarProximoTile();
             novoTurno();
         } else {
-           this.status = "Partida_Finalizada";
+            this.status = "Partida_Finalizada";
         }
         return this;
     }
 
     private void novoTurno() {
         turnos.add(turno);
-        this.turno = new Turno(proximoTile, jogadores.get(jogadorIndex++), "Início_Turno");
+        this.turno = new Turno(proximoTile, proximoJogador(), "Início_Turno");
     }
 
     public void posicionarPrimeiroTile(Tile tile) {
@@ -125,6 +130,6 @@ public class Partida {
         return null;
     }
     public String relatorioTabuleiro() {
-    	return tabuleiro.toString();
+        return tabuleiro.toString();
     }
 }
