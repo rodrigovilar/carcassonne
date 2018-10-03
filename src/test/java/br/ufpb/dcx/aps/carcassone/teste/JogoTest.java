@@ -1,6 +1,7 @@
 package br.ufpb.dcx.aps.carcassone.teste;
 
 import static br.ufpb.dcx.aps.carcassone.TilesJogoBase.*;
+import static br.ufpb.dcx.aps.carcassone.TilesMinaOuro.*;
 import static br.ufpb.dcx.aps.carcassone.teste.Assertiva.ocorreExcecao;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -398,25 +399,25 @@ public class JogoTest {
 
 	/**
 	 * Caso de tese 18
-	 * 
+	 *
 	 * Verificar estrada antes e depois de colocar Meeple
 	 */
 	@Test
 	public void verificarEstrada() {
 		mockarTiles(tiles, t30);
 		Partida partida = jogo.criarPartida(tiles, AMARELO, VERMELHO);
-		
+
 		Assert.assertEquals("30(O,L)", partida.getEstradas());
-		
+
 		ocorreExcecaoJogo(() -> partida.posicionarMeepleEstrada(OESTE),
 				"Impossível posicionar meeple na peça inicial");
 
 		Assert.assertEquals("30(O,L)", partida.getEstradas());
 	}
-	
+
 	/**
 	 * Caso de teste 19
-	 * 
+	 *
 	 *  Estrada com dois tiles e meeple
 	 */
 	@Test
@@ -433,15 +434,15 @@ public class JogoTest {
 
 		partida.finalizarTurno();
 		Assert.assertEquals("30(O,L) 64(O,L-AMARELO)", partida.getEstradas());
-		
+
 		verificarRelatorioPartida(partida, "Partida_Finalizada", "AMARELO(0,7); VERMELHO(0,7)");
 		ocorreExcecaoJogo(() -> partida.relatorioTurno(), "Partida finalizada");
 		verificarRelatorioTabuleiro(partida, "30N64L");
 	}
-	
+
 	/**
 	 * Caso de teste 20
-	 * 
+	 *
 	 * Estradas desconexas com meeple
 	 */
 	@Test
@@ -452,22 +453,22 @@ public class JogoTest {
 
 		partida.posicionarTile(t30, LESTE);
 		partida.finalizarTurno();
-		
+
 		partida.posicionarTile(t30, SUL);
 		Assert.assertEquals("30(O,L) 64(O,L)\n51(O,S)", partida.getEstradas());
-		
+
 		partida.posicionarMeepleEstrada(SUL);
 		Assert.assertEquals("30(O,L) 64(O,L)\n51(O,S-VERMELHO)", partida.getEstradas());
-		
+
 		verificarRelatorioPartida(partida, "Em_Andamento", "AMARELO(0,7); VERMELHO(0,6)");
 		verificarRelatorioTurno(partida, "VERMELHO", "51N", "Meeple_Posicionado");
 		verificarRelatorioTabuleiro(partida, "30N64L\n51N");
 
 	}
-	
+
 	/**
 	 * Caso de teste 21
-	 * 
+	 *
 	 * Posicionar meeple em estrada já ocupada
 	 */
 	@Test
@@ -479,28 +480,28 @@ public class JogoTest {
 		partida.posicionarTile(t30, LESTE);
 		partida.posicionarMeepleEstrada(LESTE);
 		partida.finalizarTurno();
-		
+
 		partida.posicionarTile(t30, SUL);
 		partida.posicionarMeepleEstrada(OESTE);
 		partida.finalizarTurno();
 		Assert.assertEquals("30(O,L) 64(O,L-AMARELO)\n51(O-VERMELHO,S)", partida.getEstradas());
-		
+
 		girar(partida, 1);
 		partida.posicionarTile(t64, LESTE);
 		Assert.assertEquals("30(O,L) 64(O,L-AMARELO) 52(N,O)\n51(O-VERMELHO,S)", partida.getEstradas());
-		
+
 		ocorreExcecaoJogo(() -> partida.posicionarMeepleEstrada(OESTE),
 				"Impossível posicionar meeple pois a estrada já está ocupada pelo meeple AMARELO no lado Leste do tile 64");
-		
+
 		verificarRelatorioPartida(partida, "Em_Andamento", "AMARELO(0,6); VERMELHO(0,6)");
 		verificarRelatorioTurno(partida, "AMARELO", "52L", "Tile_Posicionado");
 		verificarRelatorioTabuleiro(partida, "30N64L52L\n51N");
 
 	}
-	
+
 	/**
 	 * Caso de teste 22
-	 * 
+	 *
 	 * Ao tentar posicionar meeple de campo em lado que não tem campo, deve ser lançada uma
 	 * exceção.
 	 */
@@ -517,28 +518,28 @@ public class JogoTest {
 		ocorreExcecaoJogo(() -> partida.posicionarMeepleCampo(SUDOESTE),
 				"Impossível posicionar meeple em campo pois o vertice Sudoeste do tile 02 é totalmente ocupado por Cidade");
 	}
-	
+
 	/**
 	 * Caso de tese 23
-	 * 
+	 *
 	 * Verificar campo antes e depois de colocar Meeple
 	 */
 	@Test
 	public void verificarCampo() {
 		mockarTiles(tiles, t30);
 		Partida partida = jogo.criarPartida(tiles, AMARELO, VERMELHO);
-		
+
 		Assert.assertEquals("30(NO,NE)\\n30(SO,SE)", partida.getCampos());
-		
+
 		ocorreExcecaoJogo(() -> partida.posicionarMeepleCampo(SUDESTE),
 				"Impossível posicionar meeple na peça inicial");
 
 		Assert.assertEquals("30(NO,NE)\n30(SO,SE)", partida.getCampos());
 	}
-	
+
 	/**
 	 * Caso de teste 24
-	 * 
+	 *
 	 *  Campo com dois tiles e meeple
 	 */
 	@Test
@@ -556,10 +557,10 @@ public class JogoTest {
 		partida.finalizarTurno();
 		Assert.assertEquals("30(NO,NE)\n30(SO,SE) 02(NO,NE-AMARELO)", partida.getCampos());
 	}
-	
+
 	/**
 	 * Caso de teste 25
-	 * 
+	 *
 	 *  Campo com três tiles e meeple
 	 */
 	@Test
@@ -582,38 +583,38 @@ public class JogoTest {
 
 /**
  * Caso de teste 26
- * 
+ *
  *  Liguote posicionado
  */
 @Test
 public void liguotePosicionado() {
 	mockarTiles(tiles, t73, t29);
 	Partida partida = jogo.criarPartida(tiles, VERDE, VERMELHO);
-	
+
 	partida.posicionarTile(t73, LESTE);
-	partida.posicionarLiguote(t73);
-	verificarRelatorioTurno(partida, "AMARELO", "52L", "Tile_Posicionado","Liguote_posicionado");
+	partida.posicionarLingote(LESTE);
+	verificarRelatorioTurno(partida, "AMARELO", "52L", "Tile_Posicionado");
 	partida.finalizarTurno();
-	
+
 	partida.posicionarTile(t29, LESTE);
-	ocorreExcecaoJogo(() -> partida.posicionarLiguote(SUL),
-			"Impossível posicionar liguote em tile não mina");	
+	ocorreExcecaoJogo(() -> partida.posicionarLingote(SUL),
+			"Impossível posicionar liguote em tile não mina");
 }
 
 /**
  * Caso de teste 27
- * 
+ *
  *  Liguote posicionado na vertical
  */
 @Test
 public void liguotePosicionadoVertical() {
 	mockarTiles(tiles, t73, t74);
 	Partida partida = jogo.criarPartida(tiles, VERDE, VERMELHO);
-	
+
 	partida.posicionarTile(t73, NORTE);
 	partida.posicionarTile(t74, SUL);
-	
-	ocorreExcecaoJogo(() -> partida.posicionarLiguote(SUL),
+
+	ocorreExcecaoJogo(() -> partida.posicionarLingote(SUL),
 			"Impossível posicionar liguote na verticalemte");
 	partida.finalizarTurno();
 	verificarRelatorioTurno(partida, "AMARELO", "52L", "Tile_Posicionado");
