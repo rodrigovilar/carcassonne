@@ -579,7 +579,46 @@ public class JogoTest {
 		partida.finalizarTurno();
 		Assert.assertEquals("30(NO,NE) 51(NO,NE,SE-VERMELHO)\n30(SO,SE) 02(NO,NE) 51(SO)", partida.getCampos());
 	}
+
+/**
+ * Caso de teste 26
+ * 
+ *  Liguote posicionado
+ */
+@Test
+public void liguotePosicionado() {
+	mockarTiles(tiles, t73, t29);
+	Partida partida = jogo.criarPartida(tiles, VERDE, VERMELHO);
 	
+	partida.posicionarTile(t73, LESTE);
+	partida.posicionarLiguote(t73);
+	verificarRelatorioTurno(partida, "AMARELO", "52L", "Tile_Posicionado","Liguote_posicionado");
+	partida.finalizarTurno();
+	
+	partida.posicionarTile(t29, LESTE);
+	ocorreExcecaoJogo(() -> partida.posicionarLiguote(SUL),
+			"Impossível posicionar liguote em tile não mina");	
+}
+
+/**
+ * Caso de teste 27
+ * 
+ *  Liguote posicionado na vertical
+ */
+@Test
+public void liguotePosicionadoVertical() {
+	mockarTiles(tiles, t73, t74);
+	Partida partida = jogo.criarPartida(tiles, VERDE, VERMELHO);
+	
+	partida.posicionarTile(t73, NORTE);
+	partida.posicionarTile(t74, SUL);
+	
+	ocorreExcecaoJogo(() -> partida.posicionarLiguote(SUL),
+			"Impossível posicionar liguote na verticalemte");
+	partida.finalizarTurno();
+	verificarRelatorioTurno(partida, "AMARELO", "52L", "Tile_Posicionado");
+}
+
 	private void girar(Partida partida, int quantidade) {
 		for (int i = 0; i < quantidade; i++) {
 			partida.girarTile();
