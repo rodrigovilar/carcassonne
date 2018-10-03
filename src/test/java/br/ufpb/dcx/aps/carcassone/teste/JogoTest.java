@@ -592,7 +592,7 @@ public void liguotePosicionado() {
 	
 	partida.posicionarTile(t73, LESTE);
 	partida.posicionarLiguote(t73);
-	verificarRelatorioTurno(partida, "AMARELO", "52L", "Tile_Posicionado","Liguote_posicionado");
+	verificarRelatorioTurno(partida, "AMARELO", "52L", "Tile_e_Liguote_Posicionado");
 	partida.finalizarTurno();
 	
 	partida.posicionarTile(t29, LESTE);
