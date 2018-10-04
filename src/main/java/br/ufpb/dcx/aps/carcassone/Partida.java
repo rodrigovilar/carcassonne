@@ -16,6 +16,15 @@ public class Partida {
     private ArrayList<Turno> turnos = new ArrayList<>();
     private int jogadorIndex = 0;
 
+    public Jogador proximoJogador(){
+        try {
+            return jogadores.get(jogadorIndex++);
+        } catch (IndexOutOfBoundsException e){
+            jogadorIndex = 0;
+            return jogadores.get(jogadorIndex++);
+        }
+    }
+
     Partida(BolsaDeTiles tiles, Cor[] sequencia) {
         this.tiles = tiles;
         this.status = "Em_Andamento";
@@ -48,29 +57,21 @@ public class Partida {
 
     public Partida girarTile() {
         if (this.status == "Partida_Finalizada") {
-        	throw new ExcecaoJogo("Não pode girar tiles com a partida finalizada");
+            throw new ExcecaoJogo("Não pode girar tiles com a partida finalizada");
         }
         if (turno.getStatus().equals("Tile_Posicionado")) {
             throw new ExcecaoJogo("Não pode girar tile já posicionado");
-        }
-        else {
-        	proximoTile.girar();
+        } else {
+            proximoTile.girar();
         }
         return this;
     }
 
     private void pegarProximoTile() {
-        proximoTile = tiles.pegar();
-        proximoTile.reset();
+            proximoTile = tiles.pegar();
+            proximoTile.reset();
     }
-    public Jogador proximoJogador(){
-        try {
-            return jogadores.get(jogadorIndex++);
-        } catch (IndexOutOfBoundsException e){
-            jogadorIndex = 0;
-            return jogadores.get(jogadorIndex++);
-        }
-    }
+
     public Partida finalizarTurno() {
         turno.setStatus("Finalizado");
         if (tiles.size() > turnos.size()+1) {
@@ -129,7 +130,15 @@ public class Partida {
     public String getMosteiros() {
         return null;
     }
+
     public String relatorioTabuleiro() {
         return tabuleiro.toString();
     }
+
+    public void posicionarLingote(Lado lado) {
+    }
+
+    public void posicionarPrimeiroLingote() {}
+
+    public void adicionarExtensao(Extensao extensao){}
 }

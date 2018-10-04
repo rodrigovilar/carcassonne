@@ -7,39 +7,8 @@ import br.ufpb.dcx.aps.carcassone.tabuleiro.TipoTile;
  * Source:
  * https://www.eecs.northwestern.edu/~robby/uc-courses/22001-2006-winter/tiles.html
  */
-public interface TilesJogoBase {
+public interface TilesJogoBase extends TilesJogo {
 
-	Cor AMARELO = Cor.AMARELO;
-	Cor AZUL = Cor.AZUL;
-	Cor PRETO = Cor.PRETO;
-	Cor VERDE = Cor.VERDE;
-	Cor VERMELHO = Cor.VERMELHO;
-
-	Lado NORTE = Lado.NORTE;
-	Lado LESTE = Lado.LESTE;
-	Lado SUL = Lado.SUL;
-	Lado OESTE = Lado.OESTE;
-	
-	Vertice NORDESTE = Vertice.NORDESTE;
-	Vertice SUDESTE = Vertice.SUDESTE;
-	Vertice SUDOESTE = Vertice.SUDOESTE;
-	Vertice NOROESTE = Vertice.NOROESTE;
-	
-	Origem BASE = Origem.BASE;
-
-	TipoLadoCarcassonne CAMPO = TipoLadoCarcassonne.CAMPO;
-	TipoLadoCarcassonne CIDADE = TipoLadoCarcassonne.CIDADE;
-	TipoLadoCarcassonne ESTRADA = TipoLadoCarcassonne.ESTRADA;
-
-	boolean COM_ESCUDO = true;
-	boolean SEM_ESCUDO = false;
-
-	boolean COM_MOSTEIRO = true;
-	boolean SEM_MOSTEIRO = false;
-
-	boolean UMA_CIDADE = false;
-	boolean DUAS_CIDADES = true;
-	boolean SEM_CIDADES = false;
 
 	TipoTile CCCCS50 = new TipoTileCarcassonne(BASE, CIDADE, CIDADE, CIDADE, CIDADE, COM_ESCUDO, SEM_MOSTEIRO, UMA_CIDADE);
 	TipoTile CCFC50 = new TipoTileCarcassonne(BASE, CIDADE, CIDADE, CAMPO, CIDADE, SEM_ESCUDO, SEM_MOSTEIRO, UMA_CIDADE);
