@@ -9,14 +9,11 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import br.ufpb.dcx.aps.carcassone.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.ufpb.dcx.aps.carcassone.BolsaDeTiles;
-import br.ufpb.dcx.aps.carcassone.ExcecaoJogo;
-import br.ufpb.dcx.aps.carcassone.Jogo;
-import br.ufpb.dcx.aps.carcassone.Partida;
 import br.ufpb.dcx.aps.carcassone.tabuleiro.Tile;
 
 /**
@@ -633,6 +630,21 @@ public class JogoTest {
         partida.posicionarTile(t30, SUL);
         ocorreExcecaoJogo(() -> partida.posicionarPrimeiroLingote(),
                 "Impossível posicionar lingote neste tile. O primeiro lingote deve ser posicionado em um tile da extensão mina de ouro");
+    }
+
+    /**
+     * Caso de teste 29
+     * Posicionar apenas um Lingote
+     */
+    @Test
+    public void posicionarUmLingote(){
+        Partida partida = jogo.criarPartida(tiles, AMARELO, VERMELHO);
+        partida.adicionarExtensao(Extensao.MINA_DE_OURO);
+        mockarTiles(tiles, t32, t79, t31);
+        girar(partida, 2);
+        partida.posicionarTile(t79, SUL);
+        partida.posicionarPrimeiroLingote();
+        ocorreExcecaoJogo(() -> partida.posicionarTile(t31, LESTE), "O jogador deve posicionar um segundo lingote em uma peça adjacente à anterior.");
     }
 
 

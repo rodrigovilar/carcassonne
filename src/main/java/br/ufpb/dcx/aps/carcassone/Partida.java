@@ -137,4 +137,8 @@ public class Partida {
 
     public void posicionarLingote(Lado lado) {
     }
+
+    public void posicionarPrimeiroLingote() {}
+
+    public void adicionarExtensao(Extensao extensao){}
 }
