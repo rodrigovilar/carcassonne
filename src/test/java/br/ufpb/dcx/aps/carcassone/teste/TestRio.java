@@ -35,6 +35,11 @@ public class TestRio {
 		ocorreExcecaoRio(() -> verificarRio("NASCENTE"), "Rio só pode ser iniciado com nascente");
 	}
 	
+	@Test //#03
+	//Teste Andreza
+	public void FinalizarRio() {
+		ocorreExcecaoRio(() -> verificarRio("LAGO"), "Rio só pode ser finalizado com lago"); 
+	}
 	
 	
 	private void ocorreExcecaoRio(ExceptionThrower et, String mensagem) {
