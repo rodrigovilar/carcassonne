@@ -44,6 +44,7 @@ public class TestRio {
 	@Test //#04
 	public void DoisLagosSeguidos() {
 		ocorreExcecaoRio(() -> verificarRio("LAGO"), "Não pode existir dois lagos concecutivas");
+		
 	}
 	
 	
