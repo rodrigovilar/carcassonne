@@ -4,7 +4,7 @@ import br.ufpb.dcx.aps.carcassone.tabuleiro.TipoLado;
 
 public enum TipoLadoCarcassonne implements TipoLado{
 
-	ESTRADA("Estrada"), CAMPO("Campo"), CIDADE("Cidade");
+	ESTRADA("Estrada"), CAMPO("Campo"), CIDADE("Cidade"), RIO("Rio");
 	
 	private final String abreviacao;
 
