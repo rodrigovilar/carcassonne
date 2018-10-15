@@ -30,8 +30,19 @@ public class TestRio {
 		
 	}
 	
+	@Test //#02
+	public void IniciarRio() {
+		ocorreExcecaoRio(() -> verificarRio("NASCENTE"), "Rio só pode ser iniciado com nascente");
+	}
+	
+	
 	private void ocorreExcecaoRio(ExceptionThrower et, String mensagem) {
 		ocorreExcecao(et).tipoExcecao(ExcecaoJogo.class).mensagem(mensagem);
+	}
+	
+	private void verificarRio(String verRio) {
+		String rio = jogo.getRio();
+		Assert.assertEquals("Rio: " + verRio, rio);
 	}
 			
 }
