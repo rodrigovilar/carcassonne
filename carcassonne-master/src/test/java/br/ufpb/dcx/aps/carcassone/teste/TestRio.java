@@ -46,7 +46,6 @@ public class TestRio {
 		ocorreExcecaoRio(() -> verificarRio("LAGO"), "Não pode existir dois lagos concecutivas");
 	}
 	
-
 	
 	private void ocorreExcecaoRio(ExceptionThrower et, String mensagem) {
 		ocorreExcecao(et).tipoExcecao(ExcecaoJogo.class).mensagem(mensagem);
