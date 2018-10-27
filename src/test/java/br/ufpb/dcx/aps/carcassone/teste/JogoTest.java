@@ -584,39 +584,35 @@ public class JogoTest {
      * Liguote posicionado
      */
     @Test
-    public void liguotePosicionado() {
-        mockarTiles(tiles, t73, t29);
-        Partida partida = jogo.criarPartida(tiles, VERDE, VERMELHO);
-
-        partida.posicionarTile(t73, LESTE);
-        partida.posicionarLingote(LESTE);
-        verificarRelatorioTurno(partida, "AMARELO", "52L", "Tile_Posicionado");
-        partida.finalizarTurno();
-
-        partida.posicionarTile(t29, LESTE);
-        ocorreExcecaoJogo(() -> partida.posicionarLingote(SUL),
-                "Impossível posicionar liguote em tile não mina");
+    public void liguoteJaPosicionado() {
+        mockarTiles(tiles, t29, t73);
+		Partida partida = jogo.criarPartida(tiles, VERDE, VERMELHO);
+		girar(partida, 1);
+		partida.adicionarExtensao(Extensao.MINA_DE_OURO);
+		partida.posicionarTile(t29, LESTE);
+		partida.posicionarLingote();
+		ocorreExcecaoJogo(() -> partida.posicionarLingote(),
+                "Impossível posicionar liguote, tile atual possui liguote");
+		partida.finalizarTurno();
+		verificarRelatorioTurno(partida, "VERMELHO", "73L", "lingote_Posicionado");
+	}
+	// Caso de teste 27
+	// Lingote posicionado na diagonal, com outro liguote já posicionado abrangindo 2 cenários
+	@Test
+	public void liguotePosicionadoDiagonal() {
+        mockarTiles(tiles, t10, t74, t76);
+		Partida partida = jogo.criarPartida(tiles, VERDE, VERMELHO);
+		girar(partida, 1);
+		partida.adicionarExtensao(Extensao.MINA_DE_OURO);
+		partida.posicionarTile(t10, LESTE);
+		partida.posicionarLingote();
+		partida.finalizarTurno();
+		partida.posicionarTile(t10, SUL);
+		partida.posicionarLingote();
+		partida.posicionarSegundoLingote(t10, LESTE);
+		partida.finalizarTurno();
+		verificarRelatorioTurno(partida, "VERDE", "76S", "lingote_Posicionado");
     }
-
-    /**
-     * Caso de teste 27
-     * <p>
-     * Liguote posicionado na vertical
-     */
-    @Test
-    public void liguotePosicionadoVertical() {
-        mockarTiles(tiles, t73, t74);
-        Partida partida = jogo.criarPartida(tiles, VERDE, VERMELHO);
-
-        partida.posicionarTile(t73, NORTE);
-        partida.posicionarTile(t74, SUL);
-
-        ocorreExcecaoJogo(() -> partida.posicionarLingote(SUL),
-                "Impossível posicionar liguote na verticalemte");
-        partida.finalizarTurno();
-        verificarRelatorioTurno(partida, "AMARELO", "52L", "Tile_Posicionado");
-    }
-
     /**
      * Caso de teste 28
      * Posicionar Lingote sem pegar a carta da extensão de ouro
